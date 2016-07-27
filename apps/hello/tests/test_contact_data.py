@@ -20,7 +20,7 @@ class TestContctData(TestCase):
         )
 
     def test_one(self):
-        # test if one odject in database
+        """ test if one odject in database """
         self.client = Client()
         self.url = reverse('contacts')
         response = self.client.get(self.url)
@@ -35,7 +35,7 @@ class TestContctData(TestCase):
         self.assertIn('Conts1', response.content)
 
     def test_many(self):
-        # test if more than one odject in database
+        """ test if more than one odject in database """
         MyData.objects.all().delete()
         MyData.objects.get_or_create(
             name='Name2',
