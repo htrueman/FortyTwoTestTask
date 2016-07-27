@@ -6,4 +6,4 @@ class MyDataModelTests(TestCase):
     def test_str(self):
         # check what returns MyData
         data = MyData(name='Name')
-        self.assertEqual(str(data), u'Name')
+        self.assertEqual(str(data), 'Name')
