@@ -4,6 +4,5 @@ from apps.hello.models import MyData
 
 class MyDataModelTests(TestCase):
     def test_str(self):
-        # check what returns MyData
         data = MyData(name='Name')
-        self.assertEqual(str(data), 'Name')
+        self.assertEqual(str(info), u'Name')

@@ -3,6 +3,7 @@ from django.test import TestCase, Client
 
 from apps.hello.models import MyData
 
+
 class TestContctData(TestCase):
 	def setUp(self):
         MyData.objects.all().delete()
