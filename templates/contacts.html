@@ -1,14 +1,6 @@
-{% load static from staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ PORTAL_URL }}{% static "css/hello/main.css" %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
 
 <!-- Start header -->
 <div class="row" id="header">
@@ -35,6 +27,6 @@ Skype: {{ data.skype }} <br>
 Other contacts: {{ data.other_conts }} <br>
 </div>
 {% endif %}
-
-</body>
 </html>
+
+{% endblock %}

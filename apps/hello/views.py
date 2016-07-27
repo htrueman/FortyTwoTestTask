@@ -5,4 +5,4 @@ from apps.hello.models import MyData
 
 def contact_data(request):
     data = MyData.objects.first()
-    return render(request, 'hello/contacts.html', {'data': data})
+    return render(request, 'contacts.html', {'data': data})
