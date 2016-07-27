@@ -1,3 +1,4 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,21 +18,23 @@
 </div>
 <!-- End Header -->
 
+{% if data %}
 <div class="col-xs-6" id="l_col">
-Name: Vadym</br>
-Last name: Hevlich</br>
-Date of birth: May 11, 1998</br>
-</br>
-Bio: In 2015 I've entered to KPI, here...</br>
+Name: {{ data.name }} <br>
+Last name: {{ data.last_name }} <br>
+Date of birth: {{ data.bitrhday }} <br>
+<br>
+Bio: {{ data.bio }} <br>
 </div>
 
 <div class="col-xs-6" id="r_col">
-Contacts</br>
-Email: vege1wgw@gmail.com</br>
-Jabber: lich@jabber.ua</br>
-Skype: vegerer</br>
-Other contacts: https://vk.com/v_hevlich</br>
+Contacts<br>
+Email: {{ data.email }} <br>
+Jabber: {{ data.jabber }} <br>
+Skype: {{ data.skype }} <br>
+Other contacts: {{ data.other_conts }} <br>
 </div>
+{% endif %}
 
 </body>
 </html>
