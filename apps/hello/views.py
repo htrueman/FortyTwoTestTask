@@ -8,4 +8,4 @@ def contact_data(request):
     return render(request, 'contacts.html', {'data': data})
 
 def requests_data(request):
-    return render(render, 'requests.html', {})
+    return render(request, 'requests.html', {})
