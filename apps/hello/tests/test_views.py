@@ -79,4 +79,4 @@ class TestContactData(TestCase):
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertIn("No objects in db", response.content)
+        self.assertIn("There are no objects in database", response.content)
