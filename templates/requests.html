@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+({{ news }}) 42 Coffee Cups Test Assignment
+{% endblock title %}
+
+{% block content %}
+
+ <div class="col-xs-6">
+    <h2><strong>Requests</strong><br></h2>
+    GET /requests/ 200<br>
+    GET /edit/add/ 200<br>
+    GET /img/upload/img1.png 304<br>
+    GET /img/upload/img2.png 404<br>
+    GET /requests/ 200<br>
+    GET / 200<br>
+    GET /requests/ 200<br>
+    GET / 200<br>
+    GET /requests/ 200<br>
+    GET /edit/ 200<br>
+ </div>
+ 
+{% endblock content %}
