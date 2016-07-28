@@ -4,7 +4,7 @@ from django.test import TestCase, Client
 from apps.hello.models import MyData
 
 
-class TestContctData(TestCase):
+class TestContactData(TestCase):
 
     def setUp(self):
         MyData.objects.all().delete()
@@ -35,7 +35,7 @@ class TestContctData(TestCase):
         self.assertIn('Conts1', response.content)
 
     def test_many(self):
-        """ test if more than one odject in database """
+        """ test if more than one object in database """
         MyData.objects.all().delete()
         MyData.objects.get_or_create(
             name='Name2',
@@ -70,3 +70,13 @@ class TestContctData(TestCase):
         self.assertIn('J@jabber2', response.content)
         self.assertIn('Skype2', response.content)
         self.assertIn('Conts2', response.content)
+
+    def test_none(self):
+        """ test if there are no objects in database """
+        MyData.objects.all().delete()
+        self.client = Client()
+        self.url = reverse('contacts')
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("No objects in db", response.content)
