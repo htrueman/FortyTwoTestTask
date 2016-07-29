@@ -28,6 +28,7 @@ class MyData(models.Model):
     def __unicode__(self):
         return u"%s %s" % (self.name, self.last_name)
 
+
 class RequestKeeperModel(models.Model):
     name = models.URLField()
     method = models.CharField(max_length=6, default='')
