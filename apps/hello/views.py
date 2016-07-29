@@ -8,7 +8,6 @@ from apps.hello.models import MyData
 def contact_data(request):
     data = MyData.objects.first()
     errors = {}
-    context = MyData(request)
     logging.basicConfig(filename='cont.log', level=logging.DEBUG)
     # extra condition for empty db
     if data:
