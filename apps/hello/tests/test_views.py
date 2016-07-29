@@ -93,4 +93,5 @@ class TestContactData(TestCase):
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Please write your real date of birth!", response.content)
+        self.assertIn("Please write your real date of birth!", 
+            response.content)
