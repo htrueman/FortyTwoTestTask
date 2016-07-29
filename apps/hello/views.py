@@ -12,10 +12,10 @@ def contact_data(request):
         if data.birthday > datetime.datetime.now().date():
             errors['birthday'] = "Please write your real date of birth!"
             data.birthday = None
-            return render(request, 'contacts.html', 
-                {'errors': errors, 'data': data})
+            return render(
+                request, 'contacts.html', {'errors': errors, 'data': data})
         else:
-            return render(request, 'contacts.html', 
-                {'data': data})
+            return render(
+                request, 'contacts.html', {'data': data})
     else:
         return render(request, 'contacts.html', {})
