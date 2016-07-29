@@ -10,20 +10,29 @@ class MyData(models.Model):
     last_name = models.CharField(
         max_length=30)
     birthday = models.DateField()
-    bio = models.CharField(
+    bio = models.TextField(
         max_length=256,
         blank=True,
         null=True)
-    email = models.CharField(
+    email = models.EmailField(
         max_length=30)
-    jabber = models.CharField(
+    jabber = models.EmailField(
         max_length=30)
     skype = models.CharField(
         max_length=30)
-    other_conts = models.CharField(
+    other_conts = models.TextField(
         max_length=256,
         blank=True,
         null=True)
 
     def __unicode__(self):
         return u"%s %s" % (self.name, self.last_name)
+
+class RequestKeeperModel(models.Model):
+    name = models.URLField()
+    method = models.CharField(max_length=6, default='')
+    status = models.IntegerField(max_length=3, default='')
+    priority = models.PositiveIntegerField(default=0)
+
+    def __unicode__(self):
+        return self.name
