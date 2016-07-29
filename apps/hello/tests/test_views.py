@@ -101,23 +101,6 @@ class TestRequestsData(TestCase):
 
     def test_requests_data(self):
         """test if hardcoded requests_data view returns 10 objects"""
-        requests = [
-        'GET /requests/ 200',
-        'GET /edit/add/ 200',
-        'GET /img/upload/img1.png 304',
-        'GET /img/upload/img2.png 404',
-        'GET /requests/ 200',
-        'GET / 200',
-        'GET /requests/ 200',
-        'GET / 200',
-        'GET /requests/ 200',
-        'GET /edit/ 200',
-        'GET /requests/ 200',
-        'GET /requests/ 200',
-        'GET /requests/ 200',
-        'GET /requests/ 200',
-        'GET /requests/ 200',
-        'GET /requests/ 200']
         self.client = Client()
         self.url = reverse('requests')
         response = self.client.get(self.url)
