@@ -27,14 +27,14 @@ def contact_data(request):
 
 def requests_data(request):
     requests = [
-    	'GET /requests/ 200',
-    	'GET /edit/add/ 200',
-    	'GET /img/upload/img1.png 304',
-    	'GET /img/upload/img2.png 404',
-    	'GET /requests/ 200',
-    	'GET / 200',
-    	'GET /requests/ 200',
-    	'GET / 200',
-    	'GET /requests/ 200',
-    	'GET /edit/ 200']
-    return render(request, 'requests.html', {'requests':requests[-10:]})
+        'GET /requests/ 200',
+        'GET /edit/add/ 200',
+        'GET /img/upload/img1.png 304',
+        'GET /img/upload/img2.png 404',
+        'GET /requests/ 200',
+        'GET / 200',
+        'GET /requests/ 200',
+        'GET / 200',
+        'GET /requests/ 200',
+        'GET /edit/ 200']
+    return render(request, 'requests.html', {'requests': requests[-10:]})
