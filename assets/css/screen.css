@@ -3,5 +3,10 @@ body {
 	margin-left: 20px;
 }
 #header {
-    margin-left: 10px; //set the default indent
+	margin-left: 10px; //set the default indent
+}
+
+#errors {
+	font-size: 16px;
+	color: red;
 }
