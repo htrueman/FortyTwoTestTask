@@ -9,7 +9,8 @@ class MyData(models.Model):
         max_length=30)
     last_name = models.CharField(
         max_length=30)
-    birthday = models.DateField()
+    birthday = models.DateField(
+        null=True, blank=True)
     bio = models.TextField(
         max_length=256,
         blank=True,
