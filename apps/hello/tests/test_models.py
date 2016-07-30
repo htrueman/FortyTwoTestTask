@@ -14,12 +14,11 @@ class MyDataModelTests(TestCase):
 
     def test_validate_birthday(self):
         """ check if we can't enter future date """
-        # self.assertEqual(validate_birthday(datetime.date(2050,1,1)),\
-        # 'Please write your real date of birth!')
         test = MyData.objects.create(
             name='Name',
             last_name='LastName1',
             birthday=datetime.date(2010,1,1),
+            # birthday=datetime.date(2110,1,1),
             bio='Bio',
             email='Email@email',
             jabber='J@jabber',
