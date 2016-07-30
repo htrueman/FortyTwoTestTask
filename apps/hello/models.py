@@ -28,18 +28,5 @@ class MyData(models.Model):
         blank=True,
         null=True)
 
-    def clean(self):  
-        validate_birthday(value)
-
     def __unicode__(self):
         return u"%s %s" % (self.name, self.last_name)
-
-
-class RequestKeeperModel(models.Model):
-    name = models.URLField()
-    method = models.CharField(max_length=6, default='')
-    status = models.IntegerField(max_length=3, default='')
-    priority = models.PositiveIntegerField(default=0)
-
-    def __unicode__(self):
-        return self.name
