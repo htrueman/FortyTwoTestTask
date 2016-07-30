@@ -82,42 +82,11 @@ class TestContactData(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("There are no objects in database", response.content)
 
-    def test_birthday(self):
-        """ test if date of birth from the future """
-        MyData.objects.all().delete()
-        MyData.objects.get_or_create(
-            birthday=datetime.date(2020, 1, 1)
-            )
-        self.client = Client()
-        self.url = reverse('contacts')
-        response = self.client.get(self.url)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(
-            "Please write your real date of birth!", response.content)
-
 
 class TestRequestsData(TestCase):
-    """check requests_data view"""
+
     def test_requests_data(self):
-        """check if hardcoded requests_data returns 10 last requests"""
-        requests = [
-            'GET /requests/ 200',
-            'GET /edit/add/ 200',
-            'GET /img/upload/img1.png 304',
-            'GET /img/upload/img2.png 404',
-            'GET /requests/ 200',
-            'GET / 200',
-            'GET /requests/ 200',
-            'GET / 200',
-            'GET /requests/ 200',
-            'GET /edit/ 200',
-            'GET /requests/ 200',
-            'GET /requests/ 200',
-            'GET /requests/ 200',
-            'GET /requests/ 200',
-            'GET /requests/ 200',
-            'GET /requests/ 200']
+        """test if hardcoded requests_data view returns 10 objects"""
         self.client = Client()
         self.url = reverse('requests')
         response = self.client.get(self.url)
