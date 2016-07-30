@@ -17,8 +17,7 @@ class MyDataModelTests(TestCase):
         test = MyData.objects.create(
             name='Name',
             last_name='LastName1',
-            birthday=datetime.date(2010,1,1),
-            # birthday=datetime.date(2110,1,1),
+            birthday=datetime.date(2010, 1, 1),
             bio='Bio',
             email='Email@email',
             jabber='J@jabber',
