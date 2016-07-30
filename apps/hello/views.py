@@ -1,5 +1,4 @@
 import logging
-import datetime
 from django.shortcuts import render
 
 from apps.hello.models import MyData

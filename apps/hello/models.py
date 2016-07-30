@@ -1,5 +1,6 @@
 from django.db import models
-from apps.hello.validators import * 
+from apps.hello.validators import validate_birthday
+from apps.hello.validators import birth
 
 
 class MyData(models.Model):
