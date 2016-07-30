@@ -1,6 +1,4 @@
 from django.db import models
-import datetime
-import json
 from apps.hello.validators import * 
 
 

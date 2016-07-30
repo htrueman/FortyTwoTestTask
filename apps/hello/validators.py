@@ -2,6 +2,7 @@ import json
 import datetime
 from django.core.exceptions import ValidationError
 
+
 def validate_birthday(value):
     if value > datetime.datetime.now().date():
         raise ValidationError("Please write your real date of birth!")
@@ -10,7 +11,7 @@ def validate_birthday(value):
 # contain any data and it can't be sent to the validator
 # so we parse data from fixture to aviod that problem
 
-with open('apps/hello/fixtures/initial_data.json') as data_file:    
+with open('apps/hello/fixtures/initial_data.json') as data_file:
     data = json.load(data_file)
     for jo in data:
         birth_str = data[0]['fields']['birthday']
