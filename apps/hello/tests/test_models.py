@@ -1,7 +1,7 @@
 import datetime
 from django.test import TestCase
 
-from apps.hello.models import MyData, RequestKeeperModel
+from apps.hello.models import MyData
 from apps.hello.validators import validate_birthday
 
 class MyDataModelTests(TestCase):
@@ -15,11 +15,3 @@ class MyDataModelTests(TestCase):
     	""" check if we can't enter future date """
     	# self.assertEqual(validate_birthday(datetime.date(2050,1,1)), 'Please write your real date of birth!')
     	self.assertEqual(validate_birthday(datetime.datetime.now().date()), None)
-
-
-class RequestKeeperModelTests(TestCase):
-
-    def test_unicode(self):
-        """ check value that return MyData """
-        request = RequestKeeperModel(name='Name')
-        self.assertEqual(unicode(request), u'Name')
