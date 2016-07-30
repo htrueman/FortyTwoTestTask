@@ -7,8 +7,8 @@ def validate_birthday(value):
     if value > datetime.datetime.now().date():
         raise ValidationError("Please write your real date of birth!")
     else:
-    	# added to fix flake8 caution
-    	return None
+        # added to fix flake8 caution
+        return None
 
 # by the time when passing data to birthday field this field doesn't
 # contain any data and it can't be sent to the validator
