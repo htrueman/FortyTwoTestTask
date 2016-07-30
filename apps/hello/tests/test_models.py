@@ -17,4 +17,4 @@ class MyDataModelTests(TestCase):
         # self.assertEqual(validate_birthday(datetime.date(2050,1,1)),\
         # 'Please write your real date of birth!')
         self.assertEqual(validate_birthday(
-            datetime.datetime.now().date()), "OK")
+            datetime.datetime.now().date()), "Done")
