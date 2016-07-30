@@ -9,6 +9,7 @@ def validate_birthday(value):
         return "Error"
     else:
         return "OK"
+    return "Done"
 
 # by the time when passing data to birthday field this field doesn't
 # contain any data and it can't be sent to the validator
