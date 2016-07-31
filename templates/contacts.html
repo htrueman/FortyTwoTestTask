@@ -15,11 +15,6 @@
 Name: {{ data.name }} <br>
 Last name: {{ data.last_name }} <br>
 Date of birth: {{ data.birthday }} <br>
-{% if errors %}
-<div id="errors">
-	 {{ errors.birthday }} <br>
-</div>
-{% endif %}
 Bio: {{ data.bio|linebreaks }} <br>
 </div>
 
