@@ -29,10 +29,11 @@ class MyData(models.Model):
         null=True)
 
     def save(self, *args, **kwargs):
-        if self.birthday > datetime.datetime.now().date():
+        if datetime.datetime.strptime(self.birthday, "%Y-%m-%d").date() > datetime.datetime.now().date():
             raise ValidationError(u'Please write your real date of birth!')
+        else:
+            return "Done"
         super(MyData, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return u"%s %s" % (self.name, self.last_name)
-
