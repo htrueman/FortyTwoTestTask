@@ -14,10 +14,11 @@ class MyDataModelTests(TestCase):
 
     def test_validate_birthday(self):
         """ check if we can't enter future date """
+        MyData.objects.all().delete()
         test = MyData.objects.create(
             name='Name',
-            last_name='LastName1',
-            birthday='2010-10-10',
+            last_name='LastName',
+            birthday=datetime.datetime.now().date(),
             bio='Bio',
             email='Email@email',
             jabber='J@jabber',
@@ -27,4 +28,4 @@ class MyDataModelTests(TestCase):
         self.client = Client()
         self.url = reverse('contacts')
         response = self.client.get(self.url)
-        self.assertIn('2010-10-10', response.content)
+        self.assertIn(test.birthday.strftime("%B %d, %Y"), response.content)

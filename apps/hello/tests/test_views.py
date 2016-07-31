@@ -1,3 +1,4 @@
+import datetime
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 
@@ -8,10 +9,10 @@ class TestContactData(TestCase):
 
     def setUp(self):
         MyData.objects.all().delete()
-        MyData.objects.get_or_create(
+        MyData.objects.create(
             name='Name1',
             last_name='LastName1',
-            birthday='2001-01-01',
+            birthday=datetime.datetime.now().date(),
             bio='Bio1',
             email='Email@email1',
             jabber='J@jabber1',
@@ -40,7 +41,7 @@ class TestContactData(TestCase):
         MyData.objects.get_or_create(
             name='Name2',
             last_name='LastName2',
-            birthday='2002-02-02',
+            birthday=datetime.datetime.now().date(),
             bio='Bio2',
             email='Email@email2',
             jabber='J@jabber2',
@@ -50,7 +51,7 @@ class TestContactData(TestCase):
         MyData.objects.get_or_create(
             name='Name3',
             last_name='LastName3',
-            birthday='2003-03-03',
+            birthday=datetime.datetime.now().date(),
             bio='Bio3',
             email='Email@email3',
             jabber='J@jabber3',
