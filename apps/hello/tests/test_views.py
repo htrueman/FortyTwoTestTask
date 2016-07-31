@@ -80,14 +80,3 @@ class TestContactData(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertIn("There are no objects in database", response.content)
-
-
-class TestRequestsData(TestCase):
-
-    def test_requests_data(self):
-        """test if hardcoded requests_data view returns 10 objects"""
-        self.client = Client()
-        self.url = reverse('requests')
-        response = self.client.get(self.url)
-
-        self.assertEqual(len(response.context['requests']), 10)

@@ -26,11 +26,3 @@ class MyDataModelTests(TestCase):
         )
         self.assertEqual(validate_birthday(
             test.birthday), "Done")
-
-
-class RequestKeeperModelTests(TestCase):
-
-    def test_unicode(self):
-        """ check value that return MyData """
-        request = RequestKeeperModel(name='Name')
-        self.assertEqual(unicode(request), u'Name')

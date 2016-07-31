@@ -1,16 +1,24 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}
-42 Coffee Cups Test Assignment
+({{ news }}) 42 Coffee Cups Test Assignment
 {% endblock title %}
 
 {% block content %}
+{% load static from staticfiles %}
+<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
- <div class="col-xs-6">
-    <h2><strong>Requests</strong><br></h2>
-{% for request in requests %}
-{{ request }}<br>
-{% endfor %}
- </div>
-
+<div class="container-fluid div-main" id="data-container">
+    <div align="center"><strong>Requests</strong></div>
+    <div id='requests' class="col-md-5 col-md-offset-4 div-requests">
+    {% for request in requests %}
+        <div id="{{ forloop.counter0 }}"  class='request'>
+            <div id="request-{{ request.pk }}">
+    #{{ request.pk }}: {{ request.date|date:"Y-m-d H:i:s.u" }} {{ request.method }} {{ request.path }}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
 {% endblock content %}
