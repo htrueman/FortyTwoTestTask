@@ -1,6 +1,7 @@
 from django.db import models
-from apps.hello.validators import validate_birthday
-from apps.hello.validators import birth
+
+import datetime
+from django.core.exceptions import ValidationError
 
 
 class MyData(models.Model):
@@ -11,7 +12,7 @@ class MyData(models.Model):
         max_length=30)
     last_name = models.CharField(
         max_length=30)
-    birthday = models.DateField(validators=[validate_birthday(birth)])
+    birthday = models.DateField()
     bio = models.TextField(
         max_length=256,
         blank=True,
@@ -27,15 +28,11 @@ class MyData(models.Model):
         blank=True,
         null=True)
 
+    def save(self, *args, **kwargs):
+        if self.birthday > datetime.datetime.now().date():
+            raise ValidationError(u'Please write your real date of birth!')
+        super(MyData, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return u"%s %s" % (self.name, self.last_name)
 
-
-class RequestKeeperModel(models.Model):
-    name = models.URLField()
-    method = models.CharField(max_length=6, default='')
-    status = models.IntegerField(max_length=3, default='')
-    priority = models.PositiveIntegerField(default=0)
-
-    def __unicode__(self):
-        return self.name
