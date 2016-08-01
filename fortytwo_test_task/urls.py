@@ -14,9 +14,9 @@ urlpatterns = patterns(
     url(r'^$', 'hello.views.contact_data', name='contacts'),
     url(r'^requests/', RequestKeeperView.as_view(), name='requests'),
     url(r'^requests/fetching/new$', 'hello.views.check_new_requests',
-    	name='request-check-new'),
+        name='request-check-new'),
     url(r'^requests/fetching/get$', 'hello.views.give_new_requests',
-    	name='request-fetch'),
+        name='request-fetch'),
 
     url(r'^admin/', include(admin.site.urls)),
 )
