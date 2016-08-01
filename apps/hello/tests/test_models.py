@@ -1,8 +1,8 @@
 import datetime
-from django.test import TestCase
+from django.core.urlresolvers import reverse
+from django.test import TestCase, Client
 
-from apps.hello.models import MyData, RequestKeeperModel
-from apps.hello.validators import validate_birthday
+from apps.hello.models import MyData
 
 
 class MyDataModelTests(TestCase):
@@ -14,15 +14,18 @@ class MyDataModelTests(TestCase):
 
     def test_validate_birthday(self):
         """ check if we can't enter future date """
+        MyData.objects.all().delete()
         test = MyData.objects.create(
             name='Name',
-            last_name='LastName1',
-            birthday=datetime.date(2010, 1, 1),
+            last_name='LastName',
+            birthday=datetime.datetime.now().date(),
             bio='Bio',
             email='Email@email',
             jabber='J@jabber',
             skype='Skype',
             other_conts='Conts'
         )
-        self.assertEqual(validate_birthday(
-            test.birthday), "Done")
+        self.client = Client()
+        self.url = reverse('contacts')
+        response = self.client.get(self.url)
+        self.assertIn(test.birthday.strftime("%Y-%m-%d"), response.content)

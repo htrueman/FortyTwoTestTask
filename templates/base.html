@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}{% endblock title %}</title>
+        <title>{% block title %}{% endblock title %}Site Name</title>
 
         <meta http-equiv="X-UA-Compatible" content="chrome=IE7" />
 
@@ -11,17 +11,24 @@
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
+            <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'css/screen.css' %}" media="screen, projection"/>
 
+
+        {% block extra_head %}{% endblock extra_head %}
+
     </head>
-    <body id="body" class="body-all">
-        <div class="container-fluid div-header" id="header-container">
-            <h1 class="h1-effects">42 Coffee Cups Test Assignment</h1>
+    <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+    <!-- Start header -->
+    <div class="row" id="header">
+        <div class="col-xs-6">
+            <h1>42 Coffee Cups Test Assignment</h1>
         </div>
-        <div class="container-fluid div-navibar" id="navibar-container">
-            <a href="{% url 'contacts' %}"><span class="icon-home"></span></a>
-            <a href="{% url 'requests' %}"><span class="icon-network"></span></a>
-        </div>
-        {% block content %}{% endblock content %}
+    </div>
+    <!-- End Header -->
+        {% block content %}
+
+        {% endblock content %}
     </body>
 </html>

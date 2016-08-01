@@ -1,20 +1,15 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% block title %}
+42 Coffee Cups Test Assignment
+{% endblock title %}
 {% block content %}
-
-<!-- Start header -->
-<div class="row" id="header">
-	<div class="col-xs-6">
-		<h1>42 Coffee Cups Test Assignment</h1>
-	</div>
-</div>
-<!-- End Header -->
 
 {% if data %}
 <div class="col-xs-6" id="l_col">
 Name: {{ data.name }} <br>
 Last name: {{ data.last_name }} <br>
-Date of birth: {{ data.birthday }} <br>
+Date of birth: {{ data.birthday|date:"Y-m-d" }} <br>
 Bio: {{ data.bio|linebreaks }} <br>
 </div>
 

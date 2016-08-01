@@ -9,16 +9,18 @@
 <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
-<div class="container-fluid div-main" id="data-container">
-    <div align="center"><strong>Requests</strong></div>
-    <div id='requests' class="col-md-5 col-md-offset-4 div-requests">
+ <div class="col-xs-6">
+    <h2><strong>Requests</strong><br></h2>
     {% for request in requests %}
-        <div id="{{ forloop.counter0 }}"  class='request'>
-            <div id="request-{{ request.pk }}">
-    #{{ request.pk }}: {{ request.date|date:"Y-m-d H:i:s.u" }} {{ request.method }} {{ request.path }}
-            </div>
-        </div>
+    #{{ request.pk }}: {{ request.date|date:"Y-m-d H:i:s.u" }} {{ request.method }} {{ request.path }}<br>
     {% endfor %}
+</div>
+
+<div class="col-xs-12">
+    <div class="contacts">
+        <hr width="75%" />
+        <a href="{% url "contacts" %}">Personal Data</a>
     </div>
 </div>
+
 {% endblock content %}
