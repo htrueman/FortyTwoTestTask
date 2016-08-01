@@ -28,4 +28,4 @@ class MyDataModelTests(TestCase):
         self.client = Client()
         self.url = reverse('contacts')
         response = self.client.get(self.url)
-        self.assertIn(test.birthday.strftime("%B %d, %Y"), response.content)
+        self.assertIn(test.birthday.strftime("%Y-%m-%d"), response.content)
