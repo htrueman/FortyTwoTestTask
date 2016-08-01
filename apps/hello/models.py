@@ -2,6 +2,7 @@ from django.db import models
 
 import datetime
 from django.core.exceptions import ValidationError
+from apps.hello.validators import validate_birthday
 
 
 class MyData(models.Model):
@@ -12,7 +13,7 @@ class MyData(models.Model):
         max_length=30)
     last_name = models.CharField(
         max_length=30)
-    birthday = models.DateField()
+    birthday = models.DateField(validators=[validate_birthday])
     bio = models.TextField(
         max_length=256,
         blank=True,
