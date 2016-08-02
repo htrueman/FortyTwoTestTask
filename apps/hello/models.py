@@ -1,7 +1,5 @@
 from django.db import models
 
-import datetime
-from django.core.exceptions import ValidationError
 from apps.hello.validators import validate_birthday
 
 
@@ -28,11 +26,6 @@ class MyData(models.Model):
         max_length=256,
         blank=True,
         null=True)
-
-    def save(self, *args, **kwargs):
-        if self.birthday > datetime.datetime.now().date():
-            raise ValidationError(u'Please write your real date of birth!')
-        super(MyData, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return u"%s %s" % (self.name, self.last_name)
