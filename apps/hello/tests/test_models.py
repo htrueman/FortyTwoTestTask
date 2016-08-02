@@ -1,7 +1,4 @@
 import datetime
-from django.core.urlresolvers import reverse
-from django.test import TestCase, Client
-from django.core.exceptions import ValidationError
 import traceback
 
 from apps.hello.models import MyData
