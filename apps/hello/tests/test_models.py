@@ -1,6 +1,8 @@
 import datetime
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
+from django.core.exceptions import ValidationError
+import traceback
 
 from apps.hello.models import MyData
 
@@ -16,16 +18,16 @@ class MyDataModelTests(TestCase):
         """ check if we can't enter future date """
         MyData.objects.all().delete()
         test = MyData.objects.create(
-            name='Name',
-            last_name='LastName',
-            birthday=datetime.datetime.now().date(),
-            bio='Bio',
-            email='Email@email',
-            jabber='J@jabber',
-            skype='Skype',
-            other_conts='Conts'
-        )
-        self.client = Client()
-        self.url = reverse('contacts')
-        response = self.client.get(self.url)
-        self.assertIn(test.birthday.strftime("%Y-%m-%d"), response.content)
+                name='Name',
+                last_name='LastName',
+                birthday=datetime.date(2020, 1, 1),
+                bio='Bio',
+                email='Email@email.ua',
+                jabber='J@jabber.ua',
+                skype='Skype',
+                other_conts='Conts'
+            )
+        try:
+            test.clean_fields()
+        except ValidationError:
+            self.assertIn("ValidationError", traceback.format_exc())
