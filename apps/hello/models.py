@@ -1,7 +1,5 @@
 from django.db import models
 
-import datetime
-from django.core.exceptions import ValidationError
 from apps.hello.validators import validate_birthday
 
 
