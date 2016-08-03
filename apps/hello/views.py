@@ -49,7 +49,10 @@ def give_new_requests(request):
         ]
     })
     return HttpResponse(response_data, content_type='application/json')
+<<<<<<< HEAD
 
 
 def edit_contacts(request):
     return render(request, 'edit_contacts.html', {})
+=======
+>>>>>>> 53bd6640294caef06e9c9af1206c877c559d48f0
