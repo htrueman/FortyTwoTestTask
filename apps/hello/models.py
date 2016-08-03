@@ -29,3 +29,13 @@ class MyData(models.Model):
 
     def __unicode__(self):
         return u"%s %s" % (self.name, self.last_name)
+
+
+class RequestKeeperModel(models.Model):
+    path = models.CharField(max_length=1024, verbose_name="path")
+    method = models.CharField(max_length=6, verbose_name="method")
+    date = models.DateTimeField(auto_now=True, verbose_name="date")
+    is_viewed = models.BooleanField(default=False, verbose_name="is_viewed")
+
+    class Meta:
+        ordering = ['-date']

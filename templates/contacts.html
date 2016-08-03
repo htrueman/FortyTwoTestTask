@@ -1,32 +1,38 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% block title %}
+42 Coffee Cups Test Assignment
+{% endblock title %}
 {% block content %}
 
-<!-- Start header -->
-<div class="row" id="header">
-	<div class="col-xs-6">
-		<h1>42 Coffee Cups Test Assignment</h1>
-	</div>
-</div>
-<!-- End Header -->
-
 {% if data %}
-<div class="col-xs-6" id="l_col">
+
+<div class="col-xs-6" id="l_col1">
 Name: {{ data.name }} <br>
 Last name: {{ data.last_name }} <br>
 Date of birth: {{ data.birthday|date:"Y-m-d" }} <br>
-Bio: {{ data.bio|linebreaks }} <br>
+Photo: <br>
+<img src="" alt="user photo" style="width:200px;height:200px;" > <br>
+
 </div>
 
-<div class="col-xs-6" id="r_col">
+<div class="col-xs-6" id="r_col1">
 Contacts<br>
 Email: {{ data.email }} <br>
 Jabber: {{ data.jabber }} <br>
 Skype: {{ data.skype }} <br>
 Other contacts: {{ data.other_conts|linebreaks }} <br>
+Bio: {{ data.bio|linebreaks }} <br>
 </div>
 {% else %}
 <h2>There are no objects in database. Please, fill it and try again<h2>
 {% endif %}
+
+<div class="col-xs-12">
+	<div class="requests">
+		<hr width="75%" />
+    	<a href="{% url "requests" %}">Requests</a>
+	</div>
+</div>
 
 {% endblock %}

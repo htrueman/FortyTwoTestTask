@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+42 Coffee Cups Test Assignment
+{% endblock title %}
+{% block content %}
+
+
+<div class="col-xs-3" id="l_col">
+Name:  <br>
+Last name:  <br>
+Date of birth: <br>
+Photo: <br>
+</div>
+
+<div class="col-xs-3"> 
+<input type="text">
+<input type="text">
+<input type="text">
+<div style="margin-left:73px">
+<img src="" style="width:100px;height:100px;">
+</div>
+<img src="" alt="user photo" style="width:200px;height:200px;"> <br>
+</div>
+
+<div class="col-xs-3" id="r_col">
+Contacts<br>
+Email: <br>
+Jabber: <br>
+Skype: <br>
+<br>
+Other contacts: <br>
+<br>
+<br>
+<br>
+<br>
+Bio: <br>
+</div>
+
+<div class="col-xs-3">
+<input type="text">
+<input type="text">
+<input type="text">
+<textarea rows="4" cols="50">
+</textarea>
+<textarea rows="4" cols="50">
+</textarea>
+</div>
+
+<div class="col-xs-12" id="buttons">
+	<button type="button" class="btn btn-primary">Save</button>
+	<button type="button" class="btn btn-default">Cancel</button>
+</div>
+
+<div class="col-xs-12">
+	<div class="requests">
+		<hr width="75%" />
+    	<a href="{% url "requests" %}">Requests</a>
+	</div>
+</div>
+
+{% endblock %}

@@ -15,10 +15,23 @@
         href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'css/screen.css' %}" media="screen, projection"/>
 
+
         {% block extra_head %}{% endblock extra_head %}
 
     </head>
     <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
-        {% block content %}{% endblock content %}
+    <!-- Start header -->
+    <div class="row" id="header">
+        <div class="col-xs-6">
+            <h1>42 Coffee Cups Test Assignment</h1>
+        </div>
+     <!--   <div class="col-xs-6">
+            <a href="#">Login</a>
+        </div> -->
+    </div>
+    <!-- End Header -->
+        {% block content %}
+
+        {% endblock content %}
     </body>
 </html>

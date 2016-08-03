@@ -5,3 +5,11 @@ body {
 #header {
 	margin-left: 10px; //set the default indent
 }
+
+#l_col, #r_col {
+	max-width: 150px;
+}
+
+#buttons {
+	margin-top: 40px;
+}

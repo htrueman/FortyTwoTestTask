@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+({{ news }}) 42 Coffee Cups Test Assignment
+{% endblock title %}
+
+{% block content %}
+{% load static from staticfiles %}
+<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+ <div class="col-xs-6">
+    <h2><strong>Requests</strong><br></h2>
+    {% for request in requests %}
+    #{{ request.pk }}: {{ request.date|date:"Y-m-d H:i:s.u" }} {{ request.method }} {{ request.path }}<br>
+    {% endfor %}
+</div>
+
+<div class="col-xs-12">
+    <div class="contacts">
+        <hr width="75%" />
+        <a href="{% url "contacts" %}">Personal Data</a>
+    </div>
+</div>
+
+{% endblock content %}
