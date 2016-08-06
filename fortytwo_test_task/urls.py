@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 from apps.hello.views import RequestKeeperView
+from fortytwo_test_task import settings
 admin.autodiscover()
 
 
@@ -28,3 +29,6 @@ urlpatterns = patterns(
 
     url(r'^admin/', include(admin.site.urls)),
 )
+
+urlpatterns += patterns('', url(r'^uploads/(?P<path>.*)$',
+    'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}))

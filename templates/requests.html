@@ -6,8 +6,6 @@
 
 {% block content %}
 {% load static from staticfiles %}
-<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
  <div class="col-xs-6">
     <h2><strong>Requests</strong><br></h2>
@@ -19,7 +17,7 @@
 <div class="col-xs-12">
     <div class="contacts">
         <hr width="75%" />
-        <a href="{% url "contacts" %}">Personal Data</a>
+        <a href="{% url 'contacts' %}">Personal Data</a>
     </div>
 </div>
 
