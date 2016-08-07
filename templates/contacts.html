@@ -12,8 +12,17 @@ Name: {{ data.name }} <br>
 Last name: {{ data.last_name }} <br>
 Date of birth: {{ data.birthday|date:"Y-m-d" }} <br>
 Photo: <br>
-<img src="" alt="user photo" style="width:200px;height:200px;" > <br>
-Bio: {{ data.bio|linebreaks }} <br>
+<div class="photo">
+    {% if not form.photo.value %}
+	<img class="img-responsive" src='{{ STATIC_URL }}img/default_user.jpg' style="max-height: 200px;max-width: 200px;">
+    {% else %}
+    <div class="img">
+        <img src="{{ MEDIA_URL }}{{form.photo.value}}">
+    </div>
+    {% endif %}
+    {{ form.photo }}
+</div>
+<!-- <img src="" alt="user photo" style="width:200px;height:200px;" > <br> -->
 </div>
 
 <div class="col-xs-6" id="r_col_c">

@@ -34,12 +34,19 @@
         <div class="col-xs-6">
             <h1>42 Coffee Cups Test Assignment</h1>
         </div>
-        <!-- Temp auth links -->
+
         <div class="col-xs-6">
-            <a href="{% url 'edit_contacts' %}">Login</a>
-            <a href="{% url 'contacts' %}">Logout</a>
+            {% if user.is_authenticated %}
+            <div class="username">
+                {{ user.username }}|
+                <a href="{% url "users:auth_logout" %}">Logout</a> |
+                <a href="{% url "edit_contacts" %}">Edit contact data</a>
+            </div>
+            {% else %}
+            <div class="login"><a href="{% url "users:auth_login" %}">Login</a></div>
+            {% endif %}
         </div>
-        <!-- End temp auth links -->
+
     </div>
     <!-- End Header -->
         {% block content %}
