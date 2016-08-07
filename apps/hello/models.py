@@ -10,6 +10,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 class MyData(models.Model):
     class Meta(object):
         verbose_name = "Personal Data"
+        verbose_name_plural = "Personal Data"
 
     name = models.CharField(
         max_length=30)

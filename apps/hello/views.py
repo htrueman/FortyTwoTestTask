@@ -1,6 +1,7 @@
 import json
 import logging
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
@@ -56,6 +57,7 @@ def give_new_requests(request):
 # End RequestKeeperModel views
 
 
+@login_required()
 def edit_contacts(request):
     info = MyData.objects.first()
     if not info:

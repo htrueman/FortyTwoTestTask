@@ -12,15 +12,15 @@ class EditForm(forms.ModelForm):
             'bio': forms.Textarea(attrs={
                 'cols': 35,
                 'rows': 7}),
-            'other_contacts': forms.Textarea(attrs={
+            'other_conts': forms.Textarea(attrs={
                 'cols': 35,
                 'rows': 7}),
-            'date_of_birth': DatePicker(),
+            'birthday': DatePicker(),
             'photo': forms.FileInput(attrs={'id': 'id_photo'}),
         }
 
     def __init__(self, *args, **kwargs):
         super(EditForm, self).__init__(*args, **kwargs)
         for field in self.fields:
-            if field not in 'date_of_birth':
+            if field not in 'birthday':
                 self.fields[field].widget.attrs['class'] = 'form-control'

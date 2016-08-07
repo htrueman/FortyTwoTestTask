@@ -10,6 +10,12 @@ body {
 	max-width: 550px;
 }
 
-.username {
-	margin-left: 1000px;
+.username, .login {
+	text-align: right;
+}
+
+.form_auth{
+    max-width: 30%;
+    margin: auto;
+    padding-top: 150px;
 }
