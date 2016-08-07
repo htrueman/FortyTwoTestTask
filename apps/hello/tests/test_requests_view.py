@@ -16,7 +16,7 @@ class TestRequestKeeperView(TestCase):
         self.assertTemplateUsed(result, 'requests.html')
 
     def test_fetching_from_db(self):
-        """ check if aster false reqs new correct req will pas """
+        """ check if after false reqs new req will be present on the page """
         for i in xrange(10):
             self.client.put("/false/url")
 
