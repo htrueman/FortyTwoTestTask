@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<head>
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/screen.css' %}" media="screen, projection"/>
+</head>
+<body>
+    <form action="{% url "users:auth_login" %}" method="post" class="form_auth">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{% url 'contacts' %}" />
+
+        <label for="login">Username</label>
+        <input type="text" class="form-control" id="login" value="" name="username" />
+
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="login" value="" name="password" />
+        <br>
+        <button type="submit" class="btn btn-primary">
+            Log in
+        </button>
+        <a id='a_cancel' class="btn btn-default"  href="{% url 'contacts' %}">Cancel</a>
+    </form>
+</body>

@@ -132,3 +132,9 @@ TEMPLATE_DIRS = (
 SOUTH_TESTS_MIGRATE = False
 
 logging.basicConfig(filename='cont.log', level=logging.DEBUG)
+
+REGISTRATION_OPEN = True
+
+LOGIN_URL = 'users:auth_login'
+
+LOGOUT_URL = 'users:users:auth_logout'

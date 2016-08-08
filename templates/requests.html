@@ -12,7 +12,7 @@
  <div class="col-xs-6">
     <h2><strong>Requests</strong><br></h2>
     {% for request in requests %}
-    #{{ request.pk }}: {{ request.date|date:"Y-m-d H:i:s.u" }} {{ request.method }} {{ request.path }}<br>
+    #{{ request.pk }}: {{ request.date|date:"Y-m-d H:i:s.u" }} {{ request.method }} {{ request.path }} {{ request.author }}<br>
     {% endfor %}
 </div>
 
