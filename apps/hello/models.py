@@ -36,7 +36,10 @@ class RequestKeeperModel(models.Model):
     method = models.CharField(max_length=6, verbose_name="method")
     date = models.DateTimeField(auto_now=True, verbose_name="date")
     is_viewed = models.BooleanField(default=False, verbose_name="is_viewed")
-    author = models.CharField(max_length=256, verbose_name="author", default="anonymous")
+    author = models.CharField(
+        max_length=256,
+        verbose_name="author",
+        default="anonymous")
 
     class Meta:
         ordering = ['-date']
