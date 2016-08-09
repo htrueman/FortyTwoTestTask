@@ -44,7 +44,8 @@ def give_new_requests(request):
                 'pk': req.pk,
                 'method': req.method,
                 'path': req.path,
-                'date': req.date.strftime("%Y-%m-%d %H:%M:%S.%f")
+                'date': req.date.strftime("%Y-%m-%d %H:%M:%S.%f"),
+                'author': req.author
             } for req in requests
         ]
     })
