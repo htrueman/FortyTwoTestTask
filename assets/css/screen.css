@@ -3,10 +3,29 @@ body {
 	margin-left: 20px;
 }
 #header {
-	margin-left: 10px; //set the default indent
+	margin-left: 10px;
 }
 
-#errors {
+.form_auth{
+    max-width: 30%;
+    margin: auto;
+    padding-top: 150px;
+}
+
+.ttt {
+	margin-left: 500px;
+}
+
+.reqs {
+	line-height: 35px;
 	font-size: 16px;
-	color: red;
+	text-align: center;
+}
+
+.reqs_title {
+	text-align: center;
+}
+
+.username, .login {
+	margin-left: 1100px;
 }
