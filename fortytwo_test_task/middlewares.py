@@ -6,7 +6,7 @@ class RequestKeeperMiddleware():
         is_utility_request = '/requests/fetching' in request.get_full_path()
         if not is_utility_request:
             if request.user.is_authenticated():
-                # set current username into author's 
+                # set current username into author's
                 # field if user is authenticated
                 RequestKeeperModel.objects.create(
                     path=request.get_full_path(),
@@ -14,7 +14,7 @@ class RequestKeeperMiddleware():
                     author=request.user.username
                 )
             else:
-                # set default author value if user isn't authenticated
+                # set default author value if user is not authenticated
                 RequestKeeperModel.objects.create(
                     path=request.get_full_path(),
                     method=request.method
