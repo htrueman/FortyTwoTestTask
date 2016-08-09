@@ -10,12 +10,12 @@
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
  <div class="col-xs-12">
- 	<div class="reqs_title">
-    <h2><strong>Requests</strong><br></h2>
+    <div class="reqs_title">
+        <h2><strong>Requests</strong><br></h2>
     </div>
     {% for request in requests %}
     <div class="reqs">
-    <strong>{{ request.author }}</strong> #{{ request.pk }}: {{ request.date|date:"Y-m-d H:i:s.u" }} {{ request.method }} {{ request.path }}
+        <strong>{{ request.author }}</strong> #{{ request.pk }}: {{ request.date|date:"Y-m-d H:i:s.u" }} {{ request.method }} {{ request.path }}
     </div> 
     {% endfor %}
 </div>
