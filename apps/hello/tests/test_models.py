@@ -40,6 +40,7 @@ class RequestKeeperModelTests(TestCase):
                 path='path',
                 method='method',
                 date=datetime.date(2016, 1, 1),
-                is_viewed=True
+                is_viewed=True,
+                author='author'
             )
         test_req.clean_fields()
