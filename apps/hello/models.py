@@ -1,8 +1,8 @@
 from django.db import models
 
 from apps.hello.validators import validate_birthday
-import StringIO
 
+import StringIO
 from PIL import Image
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
@@ -10,7 +10,6 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 class MyData(models.Model):
     class Meta(object):
         verbose_name = "Personal Data"
-        verbose_name_plural = "Personal Data"
 
     name = models.CharField(
         max_length=30)
@@ -74,6 +73,10 @@ class RequestKeeperModel(models.Model):
     method = models.CharField(max_length=6, verbose_name="method")
     date = models.DateTimeField(auto_now=True, verbose_name="date")
     is_viewed = models.BooleanField(default=False, verbose_name="is_viewed")
+    author = models.CharField(
+        max_length=256,
+        verbose_name="author",
+        default="anonymous")
 
     class Meta:
         ordering = ['-date']

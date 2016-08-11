@@ -35,6 +35,7 @@ class Migration(SchemaMigration):
         },
         u'hello.requestkeepermodel': {
             'Meta': {'ordering': "['-date']", 'object_name': 'RequestKeeperModel'},
+            'author': ('django.db.models.fields.CharField', [], {'default': "'anonymous'", 'max_length': '256'}),
             'date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_viewed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),

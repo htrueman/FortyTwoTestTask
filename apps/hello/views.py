@@ -7,8 +7,8 @@ from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.views.generic import ListView
 
-from apps.hello.models import MyData, RequestKeeperModel
 from apps.hello.forms import EditForm
+from apps.hello.models import MyData, RequestKeeperModel
 
 
 def contact_data(request):
@@ -17,8 +17,6 @@ def contact_data(request):
     return render(request, 'contacts.html', {'data': data})
 
 
-#                          |||
-# RequestKeeperModel views VVV
 class RequestKeeperView(ListView):
     model = RequestKeeperModel
     template_name = 'requests.html'
@@ -49,12 +47,12 @@ def give_new_requests(request):
                 'pk': req.pk,
                 'method': req.method,
                 'path': req.path,
-                'date': req.date.strftime("%Y-%m-%d %H:%M:%S.%f")
+                'date': req.date.strftime("%Y-%m-%d %H:%M:%S.%f"),
+                'author': req.author
             } for req in requests
         ]
     })
     return HttpResponse(response_data, content_type='application/json')
-# End RequestKeeperModel views
 
 
 @login_required()

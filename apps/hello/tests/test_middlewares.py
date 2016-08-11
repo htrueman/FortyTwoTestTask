@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TestCase, Client
 
 from apps.hello.models import RequestKeeperModel
 
@@ -52,3 +52,15 @@ class TestRequestKeeperMiddleware(TestCase):
         after_count = RequestKeeperModel.objects.count()
         self.assertEqual(
             count + delta, after_count)
+
+    def test_anon_user(self):
+        """ check if request is from anonymous user,
+        requests.html page should display anonymous
+        as author of request """
+        RequestKeeperModel.objects.all().delete()
+        self.client.logout()
+        self.client = Client()
+        self.url = reverse('requests')
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('anonymous', response.content)

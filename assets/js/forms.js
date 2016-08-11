@@ -44,6 +44,8 @@ $(document).ready(function() {
             $('#progressbar').addClass('hidden');
             $("input").removeAttr("disabled");
             $("textarea").removeAttr("disabled");
+            window.location.replace("/"); // redirect user to contacts page after
+            // successful data saving
             setTimeout(function(){$('#message').text('');}, 2000);
         }
         });

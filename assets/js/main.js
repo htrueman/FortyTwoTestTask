@@ -61,7 +61,7 @@ function refreshRequestsOnPage(requests){
         }).prependTo('#requests');
         $('<div/>',{
             'id': req.pk,
-            'text': '#'+req.pk+": "+req.date+" "+req.method+" "+req.path
+            'text': '#'+req.pk+": "+req.date+" "+req.method+" "+req.path+" "+req.author
         }).prependTo('#'+divId);
     });
 
