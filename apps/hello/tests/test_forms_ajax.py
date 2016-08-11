@@ -6,6 +6,7 @@ from django.test import Client, TestCase
 
 from apps.hello.models import MyData
 
+
 class TestFormsAjaxAuth(TestCase):
     def setUp(self):
         self.client = Client()
