@@ -43,7 +43,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
-    'django_coverage',
 
     'apps.hello',
 )
@@ -139,5 +138,3 @@ REGISTRATION_OPEN = True
 LOGIN_URL = 'users:auth_login'
 
 LOGOUT_URL = 'users:users:auth_logout'
-
-COVERAGE_REPORT_HTML_OUTPUT_DIR = os.path.join(BASE_DIR, 'cover')
