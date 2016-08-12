@@ -49,7 +49,7 @@ class TestFormsAjaxAuth(TestCase):
         return photo
 
     def test_post_form(self):
-        """ test form ability to save edited data"""
+        """ test form ability to save edited data """
         self.client.login(username='admin', password='admin')
         response = self.client.post(reverse('edit_contacts'), {
             'name': 'N1',

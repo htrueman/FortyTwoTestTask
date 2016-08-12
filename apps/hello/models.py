@@ -69,14 +69,14 @@ class MyData(models.Model):
 
 
 class RequestKeeperModel(models.Model):
-    path = models.CharField(max_length=1024, verbose_name="path")
-    method = models.CharField(max_length=6, verbose_name="method")
+    name = models.URLField(default='')
+    method = models.CharField(max_length=6, default='')
     date = models.DateTimeField(auto_now=True, verbose_name="date")
-    is_viewed = models.BooleanField(default=False, verbose_name="is_viewed")
+    status = models.IntegerField(max_length=3, default=1)
     author = models.CharField(
         max_length=256,
         verbose_name="author",
         default="anonymous")
 
-    class Meta:
-        ordering = ['-date']
+    def __str__(self):
+        return self.name
