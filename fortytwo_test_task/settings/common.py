@@ -1,12 +1,11 @@
 """
 Django settings for fortytwo_test_task project.
-
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
-
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
+import logging
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -128,3 +127,6 @@ TEMPLATE_DIRS = (
 
 # Turn off south during test
 SOUTH_TESTS_MIGRATE = False
+
+# Logging configuration
+logging.basicConfig(filename='cont.log', level=logging.DEBUG)
