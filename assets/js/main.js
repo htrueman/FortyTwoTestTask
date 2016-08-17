@@ -1,85 +1,51 @@
-$(document).ready(function(){
-    endlessFetching();
-    $('body').mousemove(function(){
-        dropTitleCounter();
-    });;
+var count = 0;
+var last_id = 0;
+function update_items(){
+    while($('.request').length>10){
+        $('.request:last').remove();
+    }
+}
+var Active = 1;
+function updateRequests(data){
+   if (Active==0){
+    count = count + data.length;
+    $("title").html('('+count+')' + ' Name');
+   }
+   last_id = data[0].pk;
+   for(i=0;i<data.length;i++){
+       var insert = '<div class="request">' +
+                      '<strong>' + data[i].fields.author + '  ' + '</strong>' +
+                      '#' + data[i].pk + '  ' +
+                      data[i].fields.date + '  ' +
+                      data[i].fields.method + '  ' +
+                      data[i].fields.name + '  ' +
+                      data[i].fields.status + '  ' + '</div>';
+       $(insert).insertBefore($('.request:first'));
+   }
+   update_items();
+}
 
+$(window).focus(function() {
+    $("title").html('Name');
+    count = 0;
+    Active = 1;
 });
 
-function endlessFetching(){
-    setTimeout(function() {newRequestsSince(getLastRequestId())}, 10000);
-};
+$(window).blur(function() {
+    Active = 0;
+});
 
-function getLastRequestId(){
-    var lastId = /[0-9]+/.exec($("#0").children().attr('id'))[0];
-    return lastId ? lastId : 0;
-};
-
-function newRequestsSince(since){
-    $.ajax({
-        url: "/requests/fetching/new",
-        type: "GET",
-        data: {"since": since},
-    }).done(function(data){
-        if (data['count'] > 0) {
-            fetchNewRequests(data['count'])
-        } else {
-            endlessFetching()
-        };
-    });
-};
-
-function fetchNewRequests(count){
-    console.log(Math.min(count,  maxRecordsPerPage()));
-    $.ajax({
-        url: "/requests/fetching/get",
-        type: "GET",
-        data: {'count': Math.min(count,  maxRecordsPerPage())},
-    }).done(function(data){
-        addUnreadedCount(data['requests'].length);
-        refreshRequestsOnPage(data['requests']);
-        endlessFetching();
-    });
-};
-
-function refreshRequestsOnPage(requests){
-    var delta = maxRecordsPerPage() - requests.length;
-    $('.request').each(function(){
-        var id = $(this).attr('id');
-        if (id >= delta){
-            $(this).remove();
-        } else {
-            $(this).attr('id', id + requests.length);
-        }
-    });
-
-    requests.reverse().forEach(function(req, i, arr){
-        var divId = requests.length - i - 1;
-        $('<div/>',{
-            'id': divId,
-            'class':'request',
-        }).prependTo('#requests');
-        $('<div/>',{
-            'id': req.pk,
-            'text': '#'+req.pk+": "+req.date+" "+req.method+" "+req.path+" "+req.author
-        }).prependTo('#'+divId);
-    });
-
-};
-
-function addUnreadedCount(delta){
-    var currentCounter = /\([0-9]+\)/.exec($('title').text());
-    var count = currentCounter ? parseInt(/[0-9]+/.exec(currentCounter)) + delta : delta;
-    dropTitleCounter();
-    var title = $('title').text();
-    $('title').text('('+count+')'+title);
-};
-
-function dropTitleCounter(){
-    var title = $('title').text().replace(/\([0-9]+\)/, '');
-    $('title').text(title);
-};
-
-function maxRecordsPerPage(){
-    return 10;
-};
+$(document).ready(function(){
+    $("title").html('('+count+')' + ' Name');
+    setInterval(function(){
+        $.ajax({
+            url: '/requests/',
+            data: {'last_unread_item': last_id},
+            dataType: 'json',
+            success: function(data){
+                if(data.length){updateRequests(data);
+                };
+            }
+        });}
+    , 2000);
+});

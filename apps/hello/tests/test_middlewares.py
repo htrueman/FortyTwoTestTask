@@ -64,3 +64,14 @@ class TestRequestKeeperMiddleware(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertIn('anonymous', response.content)
+
+    def test_static_request(self):
+        """ make static request and check 
+        if it does't present on requests.html page """
+        RequestKeeperModel.objects.all().delete()
+        self.client = Client()
+        self.url = reverse('requests')
+        self.client.get(' /static/js/main.js')
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('anonymMMMMous', response.content)
