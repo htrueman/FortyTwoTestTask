@@ -26,5 +26,6 @@ class MyDataModelTests(TestCase):
                 skype='Skype',
                 other_conts='Conts'
             )
-        with self.assertRaisesMessage(ValidationError, 'Please, write your real date of birth!'):
+        with self.assertRaisesMessage(ValidationError,
+            'Please, write your real date of birth!'):
             test.clean_fields()
