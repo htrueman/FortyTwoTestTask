@@ -31,35 +31,6 @@ class MyData(models.Model):
         blank=True,
         null=True)
 
-    def save(self, *args, **kwargs):
-        SamePhoto = False
-        if self.photo:
-            size = (200, 200)
-            person = MyData.objects.get(id=self.id)
-            if person.photo == self.photo:
-                SamePhoto = True
-            image = Image.open(StringIO.StringIO(self.photo.read()))
-            (width, height) = image.size
-            if (width > 200) or (height > 200):
-                image.thumbnail(size, Image.ANTIALIAS)
-            output = StringIO.StringIO()
-            image.save(output, format='jpeg', quality=70)
-            output.seek(0)
-            self.photo = InMemoryUploadedFile(
-                output,
-                'ImageField', "%s.jpg" %
-                              self.photo.name.split('.')[0],
-                'image/jpeg', output.len, None)
-        try:
-            this = MyData.objects.get(id=self.id)
-            if this.photo == self.photo or SamePhoto:
-                self.photo = this.photo
-            else:
-                this.photo.delete(save=False)
-        except:
-            pass
-        super(MyData, self).save(*args, **kwargs)
-
     def __unicode__(self):
         return u"%s %s" % (self.name, self.last_name)
 

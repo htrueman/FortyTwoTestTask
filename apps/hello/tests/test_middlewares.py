@@ -7,7 +7,11 @@ from apps.hello.models import RequestKeeperModel
 class TestRequestKeeperMiddleware(TestCase):
 
     def test_middleware_valid_req(self):
-        """ check if get correct url """
+        """
+        check if get correct url, also check counts
+        for POST and GET request type to make sure
+        it stores right
+        """
         count = RequestKeeperModel.objects.count()
 
         delta_post = 3
@@ -23,11 +27,11 @@ class TestRequestKeeperMiddleware(TestCase):
             count + delta_post + delta_get, after_count)
 
         req_count = RequestKeeperModel.objects.filter(
-            path=reverse('requests')
+            name=reverse('requests')
         ).count()
 
         conts_count = RequestKeeperModel.objects.filter(
-            path=reverse('contacts')
+            name=reverse('contacts')
         ).count()
 
         get_count = RequestKeeperModel.objects.filter(
@@ -42,7 +46,10 @@ class TestRequestKeeperMiddleware(TestCase):
         self.assertEqual(get_count, req_count)
 
     def test_middleware_invalid_req(self):
-        """ check if get wrong url """
+        """
+        make several requests with wrong url
+        and check count of new records
+        """
         count = RequestKeeperModel.objects.count()
 
         delta = 3
@@ -61,6 +68,7 @@ class TestRequestKeeperMiddleware(TestCase):
         self.client.logout()
         self.client = Client()
         self.url = reverse('requests')
+        self.client.get('/false/url')
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertIn('anonymous', response.content)

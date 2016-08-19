@@ -34,8 +34,7 @@ class MyDataModelTests(TestCase):
 
 class RequestKeeperModelTests(TestCase):
 
-class RequestsTests(TestCase):
     def test_str(self):
         """ check value that return requests """
-        info = Requests(name='/')
+        info = RequestKeeperModel(name='/')
         self.assertEqual(str(info), u'/')
