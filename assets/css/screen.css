@@ -25,7 +25,3 @@ body {
 .username, .login {
 	margin-left: 100px;
 }
-
-#l_col_e, #r_col_e {
-	max-width: 550px;
-}
