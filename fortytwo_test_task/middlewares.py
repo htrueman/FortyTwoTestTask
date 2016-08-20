@@ -1,21 +1,19 @@
 from apps.hello.models import RequestKeeperModel
 
 
-class RequestKeeperMiddleware():
-    def process_request(self, request):
-        is_utility_request = '/requests/fetching' in request.get_full_path()
-        if not is_utility_request:
-            if request.user.is_authenticated():
-                # set current username into author's
-                # field if user is authenticated
-                RequestKeeperModel.objects.create(
-                    path=request.get_full_path(),
-                    method=request.method,
-                    author=request.user.username
-                )
-            else:
-                # set default author value if user is not authenticated
-                RequestKeeperModel.objects.create(
-                    path=request.get_full_path(),
-                    method=request.method
-                )
+class RequestKeeperMiddleware(object):
+    def process_response(self, request, response):
+        if not request.is_ajax():
+            if not request.path.startswith("/static/"):
+                if request.user.is_authenticated():
+                    req = RequestKeeperModel(method=request.method,
+                                            name=request.path,
+                                            status=response.status_code,
+                                            author=request.user.username)
+                    req.save()
+                else:
+                    req = RequestKeeperModel(method=request.method,
+                                            name=request.path,
+                                            status=response.status_code)
+                    req.save()
+        return response
