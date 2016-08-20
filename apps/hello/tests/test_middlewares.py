@@ -66,9 +66,19 @@ class TestRequestKeeperMiddleware(TestCase):
         as author of request """
         RequestKeeperModel.objects.all().delete()
         self.client.logout()
-        self.client = Client()
         self.url = reverse('requests')
-        self.client.get('/false/url')
+        self.client.get('/some/url')
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertIn('anonymous', response.content)
+
+    def test_auth_user(self):
+        """ check if request is from authenticated user,
+        requests.html page should display username
+        as author of request """
+        RequestKeeperModel.objects.all().delete()
+        self.client.login(username='admin', password='admin')
+        self.client.get('/some/url')
+        response = self.client.get(reverse('requests'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('admin', response.content)
