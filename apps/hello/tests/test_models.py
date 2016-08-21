@@ -1,7 +1,6 @@
 import datetime
 from django.test import TestCase
 from django.core.exceptions import ValidationError
-import traceback
 
 from apps.hello.models import MyData, RequestKeeperModel
 
