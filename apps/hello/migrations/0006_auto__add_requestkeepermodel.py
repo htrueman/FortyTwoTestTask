@@ -11,10 +11,10 @@ class Migration(SchemaMigration):
         # Adding model 'RequestKeeperModel'
         db.create_table(u'hello_requestkeepermodel', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.URLField')(max_length=200)),
-            ('method', self.gf('django.db.models.fields.CharField')(default='', max_length=6)),
-            ('status', self.gf('django.db.models.fields.IntegerField')(default='', max_length=3)),
-            ('priority', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
+            ('path', self.gf('django.db.models.fields.CharField')(max_length=1024)),
+            ('method', self.gf('django.db.models.fields.CharField')(max_length=6)),
+            ('date', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('is_viewed', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal(u'hello', ['RequestKeeperModel'])
 
@@ -38,12 +38,12 @@ class Migration(SchemaMigration):
             'skype': ('django.db.models.fields.CharField', [], {'max_length': '30'})
         },
         u'hello.requestkeepermodel': {
-            'Meta': {'object_name': 'RequestKeeperModel'},
+            'Meta': {'ordering': "['-date']", 'object_name': 'RequestKeeperModel'},
+            'date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'method': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '6'}),
-            'name': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
-            'priority': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'status': ('django.db.models.fields.IntegerField', [], {'default': "''", 'max_length': '3'})
+            'is_viewed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'method': ('django.db.models.fields.CharField', [], {'max_length': '6'}),
+            'path': ('django.db.models.fields.CharField', [], {'max_length': '1024'})
         }
     }
 

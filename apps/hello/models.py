@@ -29,3 +29,17 @@ class MyData(models.Model):
 
     def __unicode__(self):
         return u"%s %s" % (self.name, self.last_name)
+
+
+class RequestKeeperModel(models.Model):
+    name = models.URLField(default='')
+    method = models.CharField(max_length=6, default='')
+    date = models.DateTimeField(auto_now=True, verbose_name="date")
+    status = models.IntegerField(max_length=3, default=1)
+    author = models.CharField(
+        max_length=256,
+        verbose_name="author",
+        default="anonymous")
+
+    def __str__(self):
+        return self.name
