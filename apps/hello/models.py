@@ -2,10 +2,6 @@ from django.db import models
 
 from apps.hello.validators import validate_birthday
 
-import StringIO
-from PIL import Image
-from django.core.files.uploadedfile import InMemoryUploadedFile
-
 
 class MyData(models.Model):
     class Meta(object):

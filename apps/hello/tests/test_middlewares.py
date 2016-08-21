@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from django.test import TestCase, Client
+from django.test import TestCase
 
 from apps.hello.models import RequestKeeperModel
 
@@ -46,6 +46,7 @@ class TestRequestKeeperMiddleware(TestCase):
         self.assertEqual(get_count, req_count)
 
     def test_with_static_req(self):
+        " make static request to ensure it does't present on template "
         RequestKeeperModel.objects.all().delete()
         self.client.logout()
         self.url = reverse('requests')

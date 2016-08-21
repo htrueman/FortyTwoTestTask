@@ -1,10 +1,11 @@
 import json
-from django.test import TestCase, Client
+from django.test import TestCase
 from django.core.urlresolvers import reverse
 
 from django.test import RequestFactory
 from apps.hello.models import RequestKeeperModel
 from apps.hello.views import requests
+
 
 class TestRequestKeeperView(TestCase):
 
