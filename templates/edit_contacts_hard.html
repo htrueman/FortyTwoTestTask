@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datepicker.js' %}"></script>
+
+<form id="form" method="POST" class="dynamic-form" novalidate>
+ {% csrf_token %}
+ <div class="content">
+    <div class="col-xs-6" id="l_col_e">
+        <br>
+        Name: Name
+        Last name: LastName
+        <p style="position: relative;">Date of birth: 01-01-2011</p>
+        Photo: <br>
+            <div class="photo">
+                    Some photo
+          </div>
+    </div>
+    <div class="col-xs-6" id="r_col_e">
+        <strong>Contacts</strong> <br>
+        Email: e@mail.com
+        Jabber: j@jabber.com
+        Skype: skype
+        Other contacts:<br><div class="other">OtherContacts</div>
+        Bio:<br><div class="other">Bio</div>
+        <br>
+         <div id="message"></div>
+         <progress id="progressbar" class="hidden" style="width:300px" value="0" max="100"></progress>
+         <br>
+    </div>
+    <div class="col-xs-12">
+        <button id='submit_button' class="btn btn-primary" type="submit">Submit</button>
+        <a id='a_cancel' class="btn btn-default"  href="#">Cancel</a>
+    </div>
+ </div>
+</form>
+
+<div class="col-xs-12">
+    <div class="requests">
+        <hr width="75%" />
+        <a href="#">Requests</a>
+    </div>
+</div>
+
+{% endblock %}
