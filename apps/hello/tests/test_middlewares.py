@@ -6,9 +6,9 @@ from apps.hello.models import RequestKeeperModel
 
 class TestRequestKeeperMiddleware(TestCase):
 
-    def test_middleware_valid_req(self):
+    def test_reqs_storing(self):
         """
-        check if get correct url, also check counts
+        check if get get several, also check counts
         for POST and GET request type to make sure
         it stores right
         """
@@ -45,20 +45,13 @@ class TestRequestKeeperMiddleware(TestCase):
         self.assertEqual(post_count, conts_count)
         self.assertEqual(get_count, req_count)
 
-    def test_middleware_invalid_req(self):
-        """
-        make several requests with wrong url
-        and check count of new records
-        """
-        count = RequestKeeperModel.objects.count()
-
-        delta = 3
-        for i in xrange(delta):
-            self.client.get('/false/url')
-
-        after_count = RequestKeeperModel.objects.count()
-        self.assertEqual(
-            count + delta, after_count)
+    def test_with_static_req(self):
+        RequestKeeperModel.objects.all().delete()
+        self.client.logout()
+        self.url = reverse('requests')
+        self.client.get('/static/some_req')
+        response = self.client.get(self.url)
+        self.assertNotIn('/static/some_req', response.content)
 
     def test_anon_user(self):
         """ check if request is from anonymous user,

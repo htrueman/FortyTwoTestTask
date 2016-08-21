@@ -4,7 +4,6 @@ from django.contrib import admin
 
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
-from apps.hello.views import RequestKeeperView
 from fortytwo_test_task import settings
 admin.autodiscover()
 
@@ -15,13 +14,7 @@ urlpatterns = patterns(
     # url(r'^$', 'fortytwo_test_task.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', 'hello.views.contact_data', name='contacts'),
-    url(r'^requests/', RequestKeeperView.as_view(), name='requests'),
-    url(r'^requests/fetching/new$', 'hello.views.check_new_requests',
-        name='request-check-new'),
-    url(r'^requests/fetching/get$', 'hello.views.give_new_requests',
-        name='request-fetch'),
-
-    url(r'^edit/', 'hello.views.edit_contacts', name='edit_contacts'),
+    url(r'^requests/$', 'hello.views.requests', name='requests'),
 
     url(r'users/logout/$', auth_views.logout,
         kwargs={'next_page': 'contacts'}, name='auth_logout'),
@@ -33,5 +26,7 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
 )
 
-urlpatterns += patterns('', url(r'^uploads/(?P<path>.*)$',
-    'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}))
+urlpatterns += patterns(
+    '',
+    url(r'^uploads/(?P<path>.*)$',
+        'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}))

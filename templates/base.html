@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}{% endblock title %}Site Name</title>
+        <title>{% block title %}{% endblock title %}Name</title>
 
         <meta http-equiv="X-UA-Compatible" content="chrome=IE7" />
 
@@ -14,43 +14,14 @@
             <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'css/screen.css' %}" media="screen, projection"/>
-        <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/js/bootstrap-datetimepicker.min.js"></script>
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/css/bootstrap-datetimepicker.min.css">
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 
         {% block extra_head %}{% endblock extra_head %}
 
     </head>
     <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
-    <!-- Start header -->
-    <div class="row" id="header">
-        <div class="col-xs-6">
-            <h1>42 Coffee Cups Test Assignment</h1>
-        </div>
-
-        <div class="col-xs-6">
-            {% if user.is_authenticated %}
-            <div class="username">
-                {{ user.username }}|
-                <a href="{% url "users:auth_logout" %}">Logout</a>
-            </div>
-            {% else %}
-            <div class="login"><a href="{% url "users:auth_login" %}">Login</a></div>
-            {% endif %}
-        </div>
-
-    </div>
-    <!-- End Header -->
         {% block content %}
 
         {% endblock content %}
     </body>
 </html>
+
