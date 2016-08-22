@@ -34,13 +34,7 @@ class MyDataModelTests(TestCase):
 
 class RequestKeeperModelTests(TestCase):
 
-    def test_create_fields(self):
-        """ check if model's fields created successfully """
-        test_req = RequestKeeperModel.objects.create(
-                path='path',
-                method='method',
-                date=datetime.date(2016, 1, 1),
-                is_viewed=True,
-                author='author'
-            )
-        test_req.clean_fields()
+    def test_str(self):
+        """ check value that return requests """
+        info = RequestKeeperModel(name='/')
+        self.assertEqual(str(info), u'/')

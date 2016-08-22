@@ -23,31 +23,6 @@ class TestFormsAjaxAuth(TestCase):
             jabber='Jabber',
         )
 
-    def test_edit_content(self):
-        """ test content on edit page """
-        self.client.login(username='admin',
-                          password='admin')
-        response = self.client.get(self.url)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('Name', response.content)
-        self.assertIn('LastName', response.content)
-        self.assertIn('Email@mail', response.content)
-        self.assertIn('Skype', response.content)
-        self.assertIn('Bio', response.content)
-        self.assertIn('Conts', response.content)
-        self.assertIn('Jabber', response.content)
-
-    def get_photo(self, width=200, height=200):
-        """ function that creates photo for next test"""
-        photo = BytesIO()
-        Image.new('RGBA',
-                  (width, height),
-                  color=(1, 1, 1)).save(photo, 'JPEG')
-        photo.name = 'photo.jpeg'
-        photo.seek(0)
-        return photo
-
     def test_post_form(self):
         """ test form ability to save edited data """
         self.client.login(username='admin', password='admin')
@@ -84,8 +59,33 @@ class TestFormsAjaxAuth(TestCase):
         self.assertIn(person.bio, response.content)
         self.assertIn(person.other_conts, response.content)
 
+    def test_edit_content(self):
+        """ test content on edit page """
+        self.client.login(username='admin',
+                          password='admin')
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Name', response.content)
+        self.assertIn('LastName', response.content)
+        self.assertIn('Email@mail', response.content)
+        self.assertIn('Skype', response.content)
+        self.assertIn('Bio', response.content)
+        self.assertIn('Conts', response.content)
+        self.assertIn('Jabber', response.content)
+
+    def get_photo(self, width=200, height=200):
+        """ function that creates photo for next test"""
+        photo = BytesIO()
+        Image.new('RGBA',
+                  (width, height),
+                  color=(1, 1, 1)).save(photo, 'JPEG')
+        photo.name = 'photo.jpeg'
+        photo.seek(0)
+        return photo
+
     def test_photo_resize(self):
-        """ test photo resize """
+        """ test photo resizing """
         self.client.login(username='admin', password='admin')
         self.client.post(reverse('edit_contacts'), {
             'name': 'N2',
@@ -103,7 +103,7 @@ class TestFormsAjaxAuth(TestCase):
         self.assertEqual(tr.photo.height, 200)
 
     def test_form_validation(self):
-        """ test form ability to save edited data"""
+        """ test form ability to save edited data """
         self.client.login(username='admin', password='admin')
         response = self.client.post(reverse('edit_contacts'), {
             'name': 'N1',

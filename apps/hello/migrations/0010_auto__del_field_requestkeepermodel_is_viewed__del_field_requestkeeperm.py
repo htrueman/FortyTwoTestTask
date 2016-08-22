@@ -58,7 +58,6 @@ class Migration(SchemaMigration):
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'other_conts': ('django.db.models.fields.TextField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
-            'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'skype': ('django.db.models.fields.CharField', [], {'max_length': '30'})
         },
         u'hello.requestkeepermodel': {
@@ -68,7 +67,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'method': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '6'}),
             'name': ('django.db.models.fields.URLField', [], {'default': "''", 'max_length': '200'}),
-            'status': ('django.db.models.fields.IntegerField', [], {'default': "''", 'max_length': '3'})
+            'status': ('django.db.models.fields.IntegerField', [], {'default': '1', 'max_length': '3'})
         }
     }
 

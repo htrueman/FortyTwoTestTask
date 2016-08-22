@@ -1,13 +1,17 @@
 from django.core.urlresolvers import reverse
-from django.test import TestCase, Client
+from django.test import TestCase
 
 from apps.hello.models import RequestKeeperModel
 
 
 class TestRequestKeeperMiddleware(TestCase):
 
-    def test_middleware_valid_req(self):
-        """ check if get correct url """
+    def test_reqs_storing(self):
+        """
+        check if get get several, also check counts
+        for POST and GET request type to make sure
+        it stores right
+        """
         count = RequestKeeperModel.objects.count()
 
         delta_post = 3
@@ -23,11 +27,11 @@ class TestRequestKeeperMiddleware(TestCase):
             count + delta_post + delta_get, after_count)
 
         req_count = RequestKeeperModel.objects.filter(
-            path=reverse('requests')
+            name=reverse('requests')
         ).count()
 
         conts_count = RequestKeeperModel.objects.filter(
-            path=reverse('contacts')
+            name=reverse('contacts')
         ).count()
 
         get_count = RequestKeeperModel.objects.filter(
@@ -41,17 +45,14 @@ class TestRequestKeeperMiddleware(TestCase):
         self.assertEqual(post_count, conts_count)
         self.assertEqual(get_count, req_count)
 
-    def test_middleware_invalid_req(self):
-        """ check if get wrong url """
-        count = RequestKeeperModel.objects.count()
-
-        delta = 3
-        for i in xrange(delta):
-            self.client.get('/false/url')
-
-        after_count = RequestKeeperModel.objects.count()
-        self.assertEqual(
-            count + delta, after_count)
+    def test_with_static_req(self):
+        " make static request to ensure it does't present on template "
+        RequestKeeperModel.objects.all().delete()
+        self.client.logout()
+        self.url = reverse('requests')
+        self.client.get('/static/some_req')
+        response = self.client.get(self.url)
+        self.assertNotIn('/static/some_req', response.content)
 
     def test_anon_user(self):
         """ check if request is from anonymous user,
@@ -59,19 +60,19 @@ class TestRequestKeeperMiddleware(TestCase):
         as author of request """
         RequestKeeperModel.objects.all().delete()
         self.client.logout()
-        self.client = Client()
         self.url = reverse('requests')
+        self.client.get('/some/url')
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertIn('anonymous', response.content)
 
-    def test_static_request(self):
-        """ make static request and check 
-        if it does't present on requests.html page """
+    def test_auth_user(self):
+        """ check if request is from authenticated user,
+        requests.html page should display username
+        as author of request """
         RequestKeeperModel.objects.all().delete()
-        self.client = Client()
-        self.url = reverse('requests')
-        self.client.get(' /static/js/main.js')
-        response = self.client.get(self.url)
+        self.client.login(username='admin', password='admin')
+        self.client.get('/some/url')
+        response = self.client.get(reverse('requests'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn('anonymMMMMous', response.content)
+        self.assertIn('admin', response.content)

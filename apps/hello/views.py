@@ -35,7 +35,6 @@ def requests(request):
         'last_unread_item': last
     })
 
-
 @login_required()
 def edit_contacts(request):
     info = MyData.objects.first()
