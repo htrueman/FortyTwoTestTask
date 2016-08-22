@@ -1,6 +1,7 @@
 import datetime
 from django.test import TestCase
 from django.core.exceptions import ValidationError
+import traceback
 
 from apps.hello.models import MyData, RequestKeeperModel
 
@@ -25,10 +26,10 @@ class MyDataModelTests(TestCase):
                 skype='Skype',
                 other_conts='Conts'
             )
-        with self.assertRaisesMessage(
-                                    ValidationError,
-                                    'Please, write your real date of birth!'):
+        try:
             test.clean_fields()
+        except ValidationError:
+            self.assertIn("ValidationError", traceback.format_exc())
 
 
 class RequestKeeperModelTests(TestCase):

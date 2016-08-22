@@ -16,6 +16,8 @@ urlpatterns = patterns(
     url(r'^$', 'hello.views.contact_data', name='contacts'),
     url(r'^requests/$', 'hello.views.requests', name='requests'),
 
+    url(r'^edit/', 'hello.views.edit_contacts', name='edit_contacts'),
+
     url(r'users/logout/$', auth_views.logout,
         kwargs={'next_page': 'contacts'}, name='auth_logout'),
     url(r'^register/complete/$', RedirectView.as_view(pattern_name='contacts'),
