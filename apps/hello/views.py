@@ -6,7 +6,6 @@ from django.core.serializers import serialize
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
-from django.views.generic import ListView
 
 from apps.hello.forms import EditForm
 from apps.hello.models import MyData, RequestKeeperModel
@@ -34,6 +33,7 @@ def requests(request):
         'requests': requests,
         'last_unread_item': last
     })
+
 
 @login_required()
 def edit_contacts(request):
