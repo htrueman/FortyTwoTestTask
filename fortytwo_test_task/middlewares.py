@@ -1,4 +1,5 @@
 from apps.hello.models import RequestKeeperModel
+from django.contrib.auth.models import User
 
 
 class RequestKeeperMiddleware(object):
