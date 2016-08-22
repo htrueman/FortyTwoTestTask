@@ -32,7 +32,7 @@
     </div>
     {% for request in requests %}
 
-    <div class="request">
+<div class="request">
         <hr style="margin-left: -43% !important;" />  
         <strong>{{ request.author }}</strong> #{{ request.pk }}: {{ request.date|date:"Y-m-d H:i:s.u" }} {{ request.method }}  
         {{ request.name }} {{ request.status }}
