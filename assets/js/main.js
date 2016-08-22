@@ -14,6 +14,7 @@ function updateRequests(data){
    last_id = data[0].pk;
    for(i=0;i<data.length;i++){
        var insert = '<div class="request">' +
+                      '<hr style="margin-left: -43% !important;" />' +
                       '<strong>' + data[i].fields.author + '  ' + '</strong>' +
                       '#' + data[i].pk + '  ' +
                       data[i].fields.date + '  ' +
