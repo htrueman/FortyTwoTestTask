@@ -13,8 +13,8 @@
         {% if user.is_authenticated %}
         <div class="username">
             {{ user.username }}|
-            <a href="{% url "users:auth_logout" %}">Logout</a>|
-            <a href="{% url "edit_contacts" %}">Edit contact data</a>
+            <a href="{% url 'users:auth_logout' %}">Logout</a>|
+            <a href="{% url 'edit_contacts' %}">Edit contact data</a>
         </div>
         {% else %}
         <div class="login"><a href="{% url 'users:auth_login' %}">Login</a></div>
