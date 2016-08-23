@@ -34,6 +34,7 @@ $(document).ready(function() {
             $('input').removeClass('error');
             var msg = 'Changes have been saved';
             $('#message').text(msg);
+            $('.error').remove();
         },
         error: function(data) {
             errors = JSON.parse(data.responseText);
@@ -54,9 +55,6 @@ $(document).ready(function() {
 function display_form_errors(errors, $form) {
      for (var k in errors) {
          $form.find('input[name=' + k + ']').after('<div class="error">' + errors[k] + '</div>');
-         setTimeout(function() {
-              $('.error').hide();
-         }, 3000);
      }
 }
 function ImagePreview(input) {
