@@ -27,17 +27,35 @@
 </div>
 <!-- End Header -->
  <div class="col-xs-12">
-    <div class="reqs_title">
-        <h2><strong>Requests</strong><br></h2>
-    </div>
-    {% for request in requests %}
-
-<div class="request">
-        <hr style="margin-left: -43% !important;" />  
-        <strong>{{ request.author }}</strong> #{{ request.pk }}: {{ request.date|date:"Y-m-d H:i:s.u" }} {{ request.method }}  
-        {{ request.name }} {{ request.status }}
-    </div>
-    {% endfor %}
+    <table class="table" id="req_table">
+        <thead>
+            <tr>
+                <div class="reqs_title"><h2><strong>Requests</strong><br></h2></div>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Author</th>
+                <th>Number</th>
+                <th>Date</th>
+                <th>Method</th>
+                <th>Path</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for request in requests %}
+            <tr class="request" id="{{ request.id }}">
+                <td> <strong>{{ request.author }}</strong> </td>
+                <td> #{{ request.pk }} </td>
+                <td> {{ request.date|date:"Y-m-d H:i:s.u" }} </td>
+                <td> {{ request.method }} </td>
+                <td> {{ request.name }} </td>
+                <td> {{ request.status }} </td>
+            </tr>
+         {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 <div class="col-xs-12">
