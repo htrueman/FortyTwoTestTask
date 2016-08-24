@@ -87,4 +87,4 @@ class SignalModel(models.Model):
     object_id = models.IntegerField()
     action = models.CharField(max_length=8)
 
-from apps.hello import signals  # noqa
+from apps.hello import signals  # NOQA
