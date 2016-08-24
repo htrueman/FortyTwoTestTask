@@ -14,14 +14,19 @@
         {% if user.is_authenticated %}
         <div class="username">
             <a href="{% url 'users:auth_logout' %}">Logout</a> |
+            {% if data %}
             <a href="{% edit_link data %}">Admin</a> |
+            {% endif %}
             <a href="{% url 'edit_contacts' %}">Edit contact data</a>
         </div>
         {% else %}
         <div class="login">
         <a href="{% url 'users:auth_login' %}">Login</a> |
-        <a href="{% edit_link data %}">Admin</a>
+        <a href="#">Admin</a>
         </div>
+        {% if data %}
+        <a href="{% edit_link data %}">Admin</a>
+        {% endif %}
         {% endif %}
     </div>
 </div>
