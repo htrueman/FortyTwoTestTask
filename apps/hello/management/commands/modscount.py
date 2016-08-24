@@ -8,7 +8,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for model in get_models():
             output = 'There are %d objects in %s model' %\
-            			(model.objects.count(),
-                        	model.__name__)
+                        (model.objects.count(),
+                            model.__name__)
             self.stdout.write(output)
             self.stderr.write('error: ' + output)

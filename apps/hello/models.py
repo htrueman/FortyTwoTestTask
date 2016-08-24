@@ -80,3 +80,11 @@ class RequestKeeperModel(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SignalModel(models.Model):
+    object_type = models.CharField(max_length=256)
+    object_id = models.IntegerField()
+    action = models.CharField(max_length=8)
+
+from apps.hello import signals  # noqa
