@@ -2,11 +2,11 @@ from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 import django
 
-from models import SignalModel
+from models import Signal
 
 
 def save_info(ob_type, ob_id, ob_action):
-    sm = SignalModel(
+    sm = Signal(
         object_type=ob_type,
         object_id=ob_id,
         action=ob_action
@@ -25,7 +25,7 @@ def models_list():
 
 @receiver(post_save)
 def save_handler(sender, **kwargs):
-    if sender == SignalModel or sender not in models_list():
+    if sender == Signal or sender not in models_list():
         return
 
     action = 'create' if kwargs.get('created', False) else 'update'
@@ -35,7 +35,7 @@ def save_handler(sender, **kwargs):
 
 @receiver(pre_delete)
 def delete_handler(sender, **kwargs):
-    if sender == SignalModel or sender not in models_list():
+    if sender == Signal or sender not in models_list():
         return
 
     action = 'delete'

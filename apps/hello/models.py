@@ -82,7 +82,7 @@ class RequestKeeperModel(models.Model):
         return self.name
 
 
-class SignalModel(models.Model):
+class Signal(models.Model):
     object_type = models.CharField(max_length=256)
     object_id = models.IntegerField()
     action = models.CharField(max_length=8)
