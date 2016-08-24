@@ -22,11 +22,10 @@
         {% else %}
         <div class="login">
         <a href="{% url 'users:auth_login' %}">Login</a> |
-        <a href="#">Admin</a>
-        </div>
         {% if data %}
         <a href="{% edit_link data %}">Admin</a>
         {% endif %}
+        </div>
         {% endif %}
     </div>
 </div>
