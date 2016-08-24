@@ -8,18 +8,24 @@ from apps.hello.models import MyData
 
 class TagEditLink(TestCase):
     def test_tag_with_existing_obj(self):
-        """ Test tag with existing object """
+        """ test tag with existing object """
         person = MyData.objects.first()
         out = Template(
-            "{% load link_to_admin %}"
+            "{% load admin_link %}"
             "{% edit_link information %}"
         ).render(Context({'information': person}))
-        self.assertIn('/admin/hello/aboutme/1/', out)
+        self.assertIn('/admin/hello/mydata/1/', out)
 
     def test_tag_with_not_valid_obj(self):
-        """ Test tag with not valid object """
+        """ test tag with not valid object """
         with self.assertRaises(TemplateSyntaxError):
-            Template("{% load link_to_admin %}"
+            Template("{% load admin_link %}"
                      "{% edit_link information %}").render(
                 Context({'information': 1})
             )
+
+    def test_link_on_template(self):
+        """ test what link contains on the main page """
+        self.client = Client()
+        response = self.client.get(reverse('contacts'))
+        self.assertIn('Admin', response.content)

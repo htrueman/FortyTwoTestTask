@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load admin_link %}
 {% block title %}
 42 Coffee Cups Test Assignment
 {% endblock title %}
@@ -13,7 +14,7 @@
         {% if user.is_authenticated %}
         <div class="username">
             <a href="{% url 'users:auth_logout' %}">Logout</a> |
-            <a href="#">Admin</a> |
+            <a href="{% edit_link data %}">Admin</a> |
             <a href="{% url 'edit_contacts' %}">Edit contact data</a>
         </div>
         {% else %}
