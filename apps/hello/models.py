@@ -1,3 +1,4 @@
+# flake8: noqa
 from django.db import models
 
 from apps.hello.validators import validate_birthday
@@ -87,4 +88,4 @@ class Signal(models.Model):
     object_id = models.IntegerField()
     action = models.CharField(max_length=8)
 
-from apps.hello import signals  # NOQA
+from apps.hello import signals
