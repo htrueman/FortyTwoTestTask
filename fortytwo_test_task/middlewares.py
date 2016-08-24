@@ -9,11 +9,10 @@ class RequestKeeperMiddleware(object):
         req = RequestKeeperModel(
             method=request.method,
             name=request.path,
-            status=response.status_code,
-            author=request.user.username
+            status=response.status_code
         )
-        if not request.user.is_authenticated():
-            req.author = RequestKeeperModel.\
-                            _meta.get_field('author').get_default()
+        if request.user.is_authenticated():
+            req.author = request.user.username
+
         req.save()
         return response
