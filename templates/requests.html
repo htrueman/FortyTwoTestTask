@@ -5,7 +5,7 @@
 {% block extra_head %}
     <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+  <!--  <script src="{% static 'js/main.js' %}"></script> -->
     <script type="text/javascript">
         last_id = {{ last_unread_item }}
     </script>
@@ -35,6 +35,8 @@
         </thead>
         <thead>
             <tr>
+                <th><a href="#">Priority&darr;</a></th>
+                <th><div class="col-xs-6">Change Priority</div></th>
                 <th>Author</th>
                 <th>Number</th>
                 <th>Date</th>
@@ -46,6 +48,14 @@
         <tbody>
         {% for request in requests %}
             <tr class="request" id="{{ request.id }}">
+                <td> 0 </td>
+                <td> 
+                    <div class="form-group">
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <button type="submit" id="submit_button" value="{{ request.id }}" class="submit_button{{ request.id }} btn btn-default">Submit</button></div>
+                </td>
                 <td> <strong>{{ request.author }}</strong> </td>
                 <td> #{{ request.pk }} </td>
                 <td> {{ request.date|date:"Y-m-d H:i:s.u" }} </td>
