@@ -12,21 +12,31 @@ function update_items(){
 function insRow(data)
 {
     var x=document.getElementById('req_table');
-    var row = x.insertRow(2);
+    for(i=0;i<data.length;i++){
+        if(data[i].fields.priority == 0) {
+            row_num = parseInt(document.getElementById("req_pr").innerHTML) + 2;
+            break; 
+    }
+    }
+    var row = x.insertRow(row_num);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
     var cell5 = row.insertCell(4);
-    var cell6 = row.insertCell(-1);
+    var cell6 = row.insertCell(5);
+    var cell7 = row.insertCell(6);
+    var cell8 = row.insertCell(-1);
 
     for(i=0;i<data.length;i++){
-        cell1.innerHTML = '<strong>' + data[i].fields.author + '</strong>';
-        cell2.innerHTML = '#' + data[i].pk;
-        cell3.innerHTML = data[i].fields.date;
-        cell4.innerHTML = data[i].fields.method;
-        cell5.innerHTML = data[i].fields.name;
-        cell6.innerHTML = data[i].fields.status;
+        cell1.innerHTML = data[i].fields.priority;
+        cell2.innerHTML = row_num;
+        cell3.innerHTML = '<strong>' + data[i].fields.author + '</strong>';
+        cell4.innerHTML = '#' + data[i].pk;
+        cell5.innerHTML = data[i].fields.date;
+        cell6.innerHTML = data[i].fields.method;
+        cell7.innerHTML = data[i].fields.name;
+        cell8.innerHTML = data[i].fields.status;
         row.className = 'request';
         row.id = data[i].pk;
     }
