@@ -5,7 +5,7 @@
 {% block extra_head %}
     <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <!--  <script src="{% static 'js/main.js' %}"></script> -->
+    <script src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript">
         last_id = {{ last_unread_item }}
     </script>
@@ -35,10 +35,13 @@
         </thead>
         <thead>
             <tr>
-                <th><a href="#">Priority&darr;</a></th>
+                <th>
+                    <a href="/requests/prior/">Priority{% if sort == 'prior' %}&darr;{% endif %}</a>
+                </th>
                 <th><div class="col-xs-6">Change Priority</div></th>
                 <th>Author</th>
-                <th>Number</th>
+                <th>
+                <a href="/requests/number/"><div id="num">Number{% if sort == 'number' %}&darr;{% endif %}</div></a></th>
                 <th>Date</th>
                 <th>Method</th>
                 <th>Path</th>
@@ -47,23 +50,29 @@
         </thead>
         <tbody>
         {% for request in requests %}
+        <form id="{{ request.id }}" action="javascript:OnSubmit({{ request.id }});" method="POST">
+        {% csrf_token %}
             <tr class="request" id="{{ request.id }}">
-                <td> 0 </td>
+                <td id="req_pr"> {{ request.priority }} </td>
                 <td> 
                     <div class="form-group">
                     <div class="col-xs-6">
-                        <input type="text" class="form-control" id="usr">
+                        {{ req_form.as_p }}
                     </div>
-                    <button type="submit" id="submit_button" value="{{ request.id }}" class="submit_button{{ request.id }} btn btn-default">Submit</button></div>
+                    <button type="submit" id="submit_button" 
+                    value="{{ request.id }}" class="submit_button{{ request.id }} btn btn-default">Submit
+                    </button></div>
+                    <div class="err{{ request.id }}"></div>
                 </td>
                 <td> <strong>{{ request.author }}</strong> </td>
-                <td> #{{ request.pk }} </td>
+                <td id="req_pr"> #{{ request.pk }} </td>
                 <td> {{ request.date|date:"Y-m-d H:i:s.u" }} </td>
                 <td> {{ request.method }} </td>
                 <td> {{ request.name }} </td>
                 <td> {{ request.status }} </td>
             </tr>
-         {% endfor %}
+        </form>
+        {% endfor %}
         </tbody>
     </table>
 </div>
@@ -74,5 +83,42 @@
         <a href="{% url 'contacts' %}">Personal Data</a>
     </div>
 </div>
+
+<script type="text/javascript">
+var pk = 0;
+    function OnSubmit(id) {
+        pk = $('.submit_button' + id).val();
+        var $frm = $('#'+pk);
+        $.ajax({
+            type: "POST",
+            url: "{% url 'requests' %}",
+            global: false,
+            data: $frm.serialize() + '&pk=' + pk,
+            beforeSend: function(){
+                $('.submit_button').addClass('hidden');
+                $("input").attr("disabled", "disabled");
+            },
+            success: function(){
+                location.reload(true);
+            },
+            error: function(data){
+                errors = JSON.parse(data.responseText);
+                display_form_errors(errors, pk);
+            },
+            complete: function(){
+                $('.hidden').removeClass('hidden');
+                $("input").removeAttr("disabled");
+            }
+        });
+    }
+function display_form_errors(errors, pk) {
+    for (var k in errors) {
+         $('.err'+pk).after('<div class="error">' + errors[k] + '</div>');
+         setTimeout(function() {
+              $('.error').hide();
+         }, 2000);
+    }
+}
+</script>
 
 {% endblock content %}
