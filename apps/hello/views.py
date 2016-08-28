@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 
-from apps.hello.forms import EditForm
+from apps.hello.forms import EditForm, ChangeReqsPrior
 from apps.hello.models import MyData, RequestKeeperModel
 
 
@@ -17,7 +17,8 @@ def contact_data(request):
     return render(request, 'contacts.html', {'data': data})
 
 
-def requests(request):
+"""def requests(request):
+    req_form = ChangeReqsPrior()
     if request.is_ajax():
         if 'last_unread_item' not in request.GET:
             return None
@@ -31,7 +32,93 @@ def requests(request):
     last = requests[0].id if requests else 0
     return render(request, 'requests.html', {
         'requests': requests,
-        'last_unread_item': last
+        'last_unread_item': last,
+        'req_form': req_form
+    })
+
+def requests(request, order='default'):
+    if order == 'default':
+        requests = list(RequestKeeperModel.objects.all().
+                        order_by('-priority', '-pk'))[:10]
+    else:
+        requests = list(RequestKeeperModel.objects.all().
+                        order_by('-pk'))[:10]
+    req_form = ChangeReqsPrior()
+    if request.method == 'POST':
+        pke = request.POST['pk']
+        instance = RequestKeeperModel.objects.get(id=pke)
+        req_form = ChangeReqsPrior(request.POST, instance=instance)
+        if req_form.is_valid():
+            req_form.save()
+            instance.save()
+            RequestKeeperModel.objects.last().delete()  # after ajax,we refresh page
+            # and should delete last unnecessary request
+            if request.is_ajax():
+                return HttpResponse('OK')
+        else:
+            if request.is_ajax():
+                errors_dict = {}
+                if req_form.errors:
+                    for error in req_form.errors:
+                        print error
+                        err = req_form.errors[error]
+                        errors_dict[error] = unicode(err)
+                return HttpResponseBadRequest(json.dumps(errors_dict))
+    return render(request, 'requests.html', {
+        'requests': requests,
+        'req_form': req_form,
+        'sort': order
+    })
+
+"""
+
+def requests(request, order='number'):
+    if order == 'prior':
+        requests = list(RequestKeeperModel.objects.all().
+                        order_by('-priority', '-pk'))[:10]
+    elif order == 'number':
+        requests = list(RequestKeeperModel.objects.all().
+                        order_by('-pk'))[:10]
+    req_form = ChangeReqsPrior()
+    if request.method == 'POST':
+        pke = request.POST['pk']
+        instance = RequestKeeperModel.objects.get(id=pke)
+        req_form = ChangeReqsPrior(request.POST, instance=instance)
+        if req_form.is_valid():
+            req_form.save()
+            instance.save()
+            RequestKeeperModel.objects.last().delete()
+            if request.is_ajax():
+                return HttpResponse('OK')
+        else:
+            if request.is_ajax():
+                errors_dict = {}
+                if req_form.errors:
+                    for error in req_form.errors:
+                        print error
+                        err = req_form.errors[error]
+                        errors_dict[error] = unicode(err)
+                return HttpResponseBadRequest(json.dumps(errors_dict))
+    if request.is_ajax():
+        if 'last_unread_item' not in request.GET:
+            return None
+        object = RequestKeeperModel.objects.filter(
+            id__gt=int(
+                request.GET['last_unread_item'])).order_by('-id')[:10]
+        object = list(object)
+        data = serialize('json', object)
+        return HttpResponse(data, content_type="application/json")
+    last = 0
+    for req in requests:
+        if req.priority == 0:
+            last = req.id
+            break
+
+    return render(request, 'requests.html', {
+        'requests': requests,
+        'req_form': req_form,
+        'last_unread_item': last,
+        'sort': order
     })
 
 
