@@ -1,3 +1,4 @@
+import datetime
 from apps.hello.models import RequestKeeperModel
 
 
@@ -9,7 +10,9 @@ class RequestKeeperMiddleware(object):
         req = RequestKeeperModel(
             method=request.method,
             name=request.path,
-            status=response.status_code
+            status=response.status_code,
+            date=datetime.datetime.now()
+
         )
         if request.user.is_authenticated():
             req.author = request.user.username

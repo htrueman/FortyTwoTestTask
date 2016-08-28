@@ -1,5 +1,6 @@
 var count = 0;
 var last_id = 0;
+
 function update_items(){
     var rowCount = $('#req_table tr').length;
     // one of the rows is row with title,
@@ -30,7 +31,8 @@ function insRow(data)
 
     for(i=0;i<data.length;i++){
         cell1.innerHTML = data[i].fields.priority;
-        cell2.innerHTML = row_num;
+        cell2.innerHTML = '<form id="{{' data[i].pk '}}" action="javascript:OnSubmit({{' data[i].pk '}});" method="POST"><div class="form-group">' + rform + '<button type="submit" id="submit_button" value="' + data[i].pk +'" class="submit_button' + data[i].pk +' btn btn-default">Submit\
+                    </button></div><div class="err' + data[i].pk + '"></div>';
         cell3.innerHTML = '<strong>' + data[i].fields.author + '</strong>';
         cell4.innerHTML = '#' + data[i].pk;
         cell5.innerHTML = data[i].fields.date;
@@ -38,8 +40,10 @@ function insRow(data)
         cell7.innerHTML = data[i].fields.name;
         cell8.innerHTML = data[i].fields.status;
         row.className = 'request';
+        cell1.id = 'req_pr';
         row.id = data[i].pk;
-    }
+     }
+
     update_items()
 }
 var Active = 1;
@@ -62,16 +66,29 @@ $(window).blur(function() {
     Active = 0;
 });
 
+var add_req = (function() {
+    var executed = false;
+    return function () {
+        if (!executed) {
+            executed = true;
+            location.reload(true);
+        }
+    };
+})();
+
 $(document).ready(function(){
     $("title").html('('+count+')' + ' Name');
     setInterval(function(){
         $.ajax({
             url: '/requests/',
-            data: {'last_unread_item': last_id},
+            data: {'last_unread_item': last_id,
+            csrfmiddlewaretoken: '{{ csrf_token }}'},
             dataType: 'json',
             success: function(data){
-                if(data.length){updateRequests(data);
-                if(data.length){insRow(data)};
+                if(data.length){
+                    updateRequests(data);
+                    insRow(data);
+
                 };
             }
         });}

@@ -77,9 +77,10 @@ class RequestKeeperModel(models.Model):
         max_length=256,
         verbose_name="author",
         default="anonymous")
+    priority = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return u"%s" % (self.name)
 
 
 class Signal(models.Model):
