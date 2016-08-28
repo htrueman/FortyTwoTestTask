@@ -25,6 +25,7 @@ class EditForm(forms.ModelForm):
             if field not in 'birthday':
                 self.fields[field].widget.attrs['class'] = 'form-control'
 
+
 class ChangeReqsPrior(forms.ModelForm):
     class Meta:
         model = RequestKeeperModel
