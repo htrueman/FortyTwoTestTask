@@ -18,7 +18,7 @@ class RequestsPriority(TestCase):
                                'pk': 1}, follow=True)
         self.assertEqual(RequestKeeperModel.objects.first().priority, 100)
 
-    def test_ajax_possst(self):
+    def test_form_displaying_errors(self):
         """ test if form displaying errors with not valid data """
         RequestKeeperModel.objects.create(
             name='/test_path/',
