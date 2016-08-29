@@ -31,8 +31,6 @@ def requests(request, order='number'):
         req_form = ChangeReqsPrior(request.POST, instance=instance)
         if req_form.is_valid():
             req_form.save()
-            instance.save()
-            RequestKeeperModel.objects.last().delete()
             if request.is_ajax():
                 return HttpResponse('OK')
         else:
