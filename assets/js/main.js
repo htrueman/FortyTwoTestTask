@@ -31,7 +31,8 @@ function insRow(data)
 
     for(i=0;i<data.length;i++){
         cell1.innerHTML = data[i].fields.priority;
-        cell2.innerHTML = '<form id="{{' data[i].pk '}}" action="javascript:OnSubmit({{' data[i].pk '}});" method="POST"><div class="form-group">' + rform + '<button type="submit" id="submit_button" value="' + data[i].pk +'" class="submit_button' + data[i].pk +' btn btn-default">Submit\
+        cell2.innerHTML = '<form id="' data[i].pk '" action="javascript:OnSubmit(' data[i].pk ');" method="POST"><div class="form-group">' + 
+        rform + '<button type="submit" id="submit_button" value="' + data[i].pk +'" class="submit_button' + data[i].pk +' btn btn-default">Submit\
                     </button></div><div class="err' + data[i].pk + '"></div>';
         cell3.innerHTML = '<strong>' + data[i].fields.author + '</strong>';
         cell4.innerHTML = '#' + data[i].pk;
