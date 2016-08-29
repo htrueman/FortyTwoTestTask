@@ -84,15 +84,6 @@
     </div>
 </div>
 
-<script>
-    var csrftoken = '{{ csrf_token }}';
-    {% for request in requests %}
-    var rform = '<div class="col-xs-6">\
-                        {{ req_form.as_p }}\
-                    </div>';
-    {% endfor %}
-</script>
-
 <script type="text/javascript">
 var pk = 0;
     function OnSubmit(id) {
