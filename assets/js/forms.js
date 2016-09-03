@@ -85,6 +85,9 @@ function ImagePreview(input) {
 $(document).ready(function(){
     var id = 0;
     $("#id_photo").change(function(){
-        ImagePreview(this);
+        var ext = $(this).val().split('.').pop().toLowerCase();
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) == 1) {
+            ImagePreview(this);
+        }
         });
     });
