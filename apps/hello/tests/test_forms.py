@@ -27,8 +27,8 @@ class TestFormsAjaxAuth(TestCase):
         """ test form ability to save edited data """
         self.client.login(username='admin', password='admin')
         response = self.client.post(reverse('edit_contacts'), {
-            'name': 'N1',
-            'last_name': 'LN1',
+            'name': 'Na',
+            'last_name': 'LNa',
             'email': 'em@em.com',
             'skype': 'sc1',
             'jabber': 'jbid@df.com',
@@ -41,8 +41,8 @@ class TestFormsAjaxAuth(TestCase):
         response = self.client.get(reverse('contacts'))
         person = MyData.objects.first()
 
-        self.assertEqual(person.name, 'N1')
-        self.assertEqual(person.last_name, 'LN1')
+        self.assertEqual(person.name, 'Na')
+        self.assertEqual(person.last_name, 'LNa')
         self.assertEqual(person.email, 'em@em.com')
         self.assertEqual(person.skype, 'sc1')
         self.assertEqual(person.jabber, 'jbid@df.com')
@@ -88,8 +88,8 @@ class TestFormsAjaxAuth(TestCase):
         """ test photo resizing """
         self.client.login(username='admin', password='admin')
         self.client.post(reverse('edit_contacts'), {
-            'name': 'N2',
-            'last_name': 'LN2',
+            'name': 'Na',
+            'last_name': 'LNa',
             'email': 'em@em.com2',
             'skype': 'sc2',
             'jabber': 'jbid2@df.com',
@@ -106,8 +106,8 @@ class TestFormsAjaxAuth(TestCase):
         """ test form ability to save edited data """
         self.client.login(username='admin', password='admin')
         response = self.client.post(reverse('edit_contacts'), {
-            'name': 'N1',
-            'last_name': 'LN1',
+            'name': 'Na',
+            'last_name': 'LNa',
             'email': 'email',
             'skype': 'sc1',
             'jabber': 'jbid@df.com',

@@ -1,8 +1,6 @@
 import datetime
 from django.test import TestCase
 from django.core.exceptions import ValidationError
-import traceback
-
 from apps.hello.models import MyData, RequestKeeperModel
 
 
@@ -17,7 +15,7 @@ class MyDataModelTests(TestCase):
         """ check if we can't enter future date """
         MyData.objects.all().delete()
         test = MyData.objects.create(
-                name='Name',
+                name='Name1',
                 last_name='LastName',
                 birthday=datetime.date(2020, 1, 1),
                 bio='Bio',
@@ -28,13 +26,12 @@ class MyDataModelTests(TestCase):
             )
         with self.assertRaisesMessage(
                                     ValidationError,
-                                    'Please, write your real date of birth!'):
+                                    'This field should contain '
+                                    'alphabetic characters only'):
             test.clean_fields()
-        
         with self.assertRaisesMessage(
                                     ValidationError,
-                                    'This field should contain'
-                                    'alphabetic characters only!'):
+                                    'Please, write your real date of birth!'):
             test.clean_fields()
 
 
