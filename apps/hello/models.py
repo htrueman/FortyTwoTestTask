@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.hello.validators import validate_birthday
+from apps.hello.validators import validate_birthday, validate_name_fields
 
 import StringIO
 from PIL import Image
@@ -12,8 +12,10 @@ class MyData(models.Model):
         verbose_name = "Personal Data"
 
     name = models.CharField(
+        validators=[validate_name_fields],
         max_length=30)
     last_name = models.CharField(
+        validators=[validate_name_fields],
         max_length=30)
     birthday = models.DateField(validators=[validate_birthday])
     bio = models.TextField(
