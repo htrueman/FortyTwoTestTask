@@ -68,9 +68,6 @@ def requests(request, order='number'):
 @login_required()
 def edit_contacts(request):
     info = MyData.objects.first()
-    if not info:
-        return render(request, 'edit_contacts.html',
-                      {'nothing': 'No data to edit'})
     if request.method == 'POST':
         form = EditForm(
           request.POST,
@@ -96,4 +93,6 @@ def edit_contacts(request):
                               {'form': form, 'message': message})
     else:
         form = EditForm(instance=info)
-        return render(request, 'edit_contacts.html', {'form': form})
+        return render(
+                        request, 'edit_contacts.html',
+                        {'form': form, 'info': info})
