@@ -26,10 +26,16 @@ class MyDataModelTests(TestCase):
                 skype='Skype',
                 other_conts='Conts'
             )
-        try:
+        with self.assertRaisesMessage(
+                                    ValidationError,
+                                    'Please, write your real date of birth!'):
             test.clean_fields()
-        except ValidationError:
-            self.assertIn("ValidationError", traceback.format_exc())
+        
+        with self.assertRaisesMessage(
+                                    ValidationError,
+                                    'This field should contain'
+                                    'alphabetic characters only!'):
+            test.clean_fields()
 
 
 class RequestKeeperModelTests(TestCase):
