@@ -36,7 +36,12 @@
         <thead>
             <tr>
                 <th>
+                    {% if curr_req != '/requests/prior_asc/' %}
                     <a href="/requests/prior/">Priority{% if sort == 'prior' %}&darr;{% endif %}</a>
+                    {% endif %}
+                    {% if curr_req != '/requests/prior_asc/' %}
+                    <a href="/requests/prior_asc/">Priority{% if sort == 'prior_asc' %}&uarr;{% endif %}</a>
+                    {% endif %}
                 </th>
                 <th><div class="col-xs-6">Change Priority</div></th>
                 <th>Author</th>
@@ -52,8 +57,8 @@
         {% for request in requests %}
         <form id="{{ request.id }}" action="javascript:OnSubmit({{ request.id }});" method="POST">
         {% csrf_token %}
-            <tr class="request" id="{{ request.id }}">
-                <td id="req_pr"> {{ request.priority }} </td>
+            <tr class="request" id="req{{ request.id }}">
+                <td class="req_pr"> {{ request.priority }} </td>
                 <td> 
                     <div class="form-group">
                     <div class="col-xs-6">
@@ -83,6 +88,11 @@
         <a href="{% url 'contacts' %}">Personal Data</a>
     </div>
 </div>
+
+<script type="text/javascript">
+    var dj_form = '<div class="col-xs-6">{{ req_form.as_p }}</div>'
+    var token = '{{ csrf_token }}'
+</script>
 
 <script type="text/javascript">
 var pk = 0;
