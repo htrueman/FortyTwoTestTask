@@ -36,12 +36,12 @@
         <thead>
             <tr>
                 <th>
-                    {% if curr_req != '/requests/prior_asc/' %}
-                    <a href="/requests/prior/">Priority{% if sort == 'prior' %}&darr;{% endif %}</a>
-                    {% endif %}
-                    {% if curr_req != '/requests/prior_asc/' %}
-                    <a href="/requests/prior_asc/">Priority{% if sort == 'prior_asc' %}&uarr;{% endif %}</a>
-                    {% endif %}
+                <div id="sort_link">
+
+                    <a href="/requests/{% if curr_req == '/requests/' or curr_req == '/requests/prior_asc/' or curr_req == '/requests/number/'  %}prior/{% endif %}{% if curr_req == '/requests/prior/' %}prior_asc/{% endif %}">
+                    Priority{% if curr_req == '/requests/prior/' %}&darr;{% elif curr_req == '/requests/prior_asc/' %}&uarr;{% endif %}</a>
+
+                </div>
                 </th>
                 <th><div class="col-xs-6">Change Priority</div></th>
                 <th>Author</th>
