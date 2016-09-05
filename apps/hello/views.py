@@ -21,6 +21,9 @@ def requests(request, order='number'):
     if order == 'prior':
         requests = list(RequestKeeperModel.objects.all().
                         order_by('-priority', '-pk'))[:10]
+    if order == 'prior_asc':
+        requests = list(RequestKeeperModel.objects.all().
+                        order_by('priority', 'pk'))[:10]
     elif order == 'number':
         requests = list(RequestKeeperModel.objects.all().
                         order_by('-pk'))[:10]
@@ -61,7 +64,8 @@ def requests(request, order='number'):
         'requests': requests,
         'req_form': req_form,
         'last_unread_item': last,
-        'sort': order
+        'sort': order,
+        'curr_req': request.path
     })
 
 
