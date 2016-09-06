@@ -13,7 +13,7 @@ function update_items(){
 }
 
 function OnSubm(pk, priority) {
-    var pr = $("#form_req").val();;
+    var pr = $("#form_req").val();
     $.ajax({
       'type': 'POST',
       'data': {
@@ -45,11 +45,22 @@ function insRow(data)
     
     var x=document.getElementById('req_table');
     $(".req_pr").each(function(i, obj) {
-        
         if (($(this).text() > 0) && window.location.pathname == '/requests/prior/') {
            row_num++; 
         }
+        else if (window.location.pathname == '/requests/prior_asc/') {
+            if ($('#req_table tr').length == 12) {
+                row_num++; 
+            }
+            else if ($(this).text() == 0){
+                row_num = $('#req_table tr').length;
+            }
+            else {
+                row_num = $('#req_table tr').length - $(this).text().length
+            }
+        }
     });
+
     var row = x.insertRow(row_num);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
