@@ -7,7 +7,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript">
-        last_id = {{ last_unread_item|add:'1'}}
+        last_id = {{ last_unread_item }}
     </script>
 {% endblock %}
 {% block content %}
@@ -70,7 +70,7 @@
                     <div class="err{{ request.id }}"></div>
                 </td>
                 <td> <strong>{{ request.author }}</strong> </td>
-                <td> #{{ request.pk }} </td>
+                <td class="pk"> #{{ request.pk }} </td>
                 <td> {{ request.date|date:"Y-m-d H:i:s.u" }} </td>
                 <td> {{ request.method }} </td>
                 <td> {{ request.name }} </td>
