@@ -36,6 +36,7 @@ function OnSubm(pk, priority) {
       complete: function(){
         $('.hidden').removeClass('hidden');
         $("input").removeAttr("disabled");
+
     }
     });
 }
