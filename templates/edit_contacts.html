@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block extra_head %}
+    {{ form.media }}
+{% endblock %}
+{% block content %}
+    <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datepicker.js' %}"></script>
+
+{% if not info %}
+        <h1>
+          No data to edit
+        </h1>
+{% else %}
+
+<form id="form" method="POST" class="dynamic-form" novalidate>
+ {% csrf_token %}
+ <div class="content">
+    <div class="col-xs-6" id="l_col_e">
+        <br>
+        Name: {{ form.name }}
+        Last name: {{ form.last_name }}
+        <p style="position: relative;">Date of birth: {{ form.birthday }}</p>
+        Photo: <br>
+            <div class="photo">
+                    {% if not form.photo.value %}
+                               <img class="img-responsive" src='{{ STATIC_URL }}img/default_user.jpg' style="max-height: 200px;max-width: 200px;">
+                    {% else %}
+                        <div class="img">
+                               <img src="{{ MEDIA_URL }}{{form.photo.value}}">
+                        </div>
+                    {% endif %}
+                        {{ form.photo }}
+          </div>
+    </div>
+    <div class="col-xs-6" id="r_col_e">
+        <strong>Contacts</strong> <br>
+        Email: {{ form.email }}
+        Jabber: {{ form.jabber }}
+        Skype: {{ form.skype }}
+        Other contacts:<br><div class="other">{{ form.other_conts }}</div>
+        Bio:<br><div class="other">{{ form.bio }}</div>
+        <br>
+         <div id="message"></div>
+         <progress id="progressbar" class="hidden" style="width:300px" value="0" max="100"></progress>
+         <br>
+    </div>
+    <div class="col-xs-12">
+        <button id='submit_button' class="btn btn-primary" type="submit">Submit</button>
+        <a id='a_cancel' class="btn btn-default"  href="{% url 'contacts' %}">Cancel</a>
+    </div>
+ </div>
+</form>
+{% endif %}
+
+<div class="col-xs-12">
+    <div class="requests">
+        <hr width="75%" />
+        <a href="{% url 'requests' %}">Requests</a>
+    </div>
+</div>
+
+{% endblock %}

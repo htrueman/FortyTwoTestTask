@@ -1,0 +1,31 @@
+body {
+	margin-top: 50px;
+	margin-left: 20px;
+}
+#header {
+	margin-left: 10px;
+}
+
+.form_auth{
+    max-width: 30%;
+    margin: auto;
+    padding-top: 150px;
+}
+
+.request {
+	line-height: 35px;
+	font-size: 16px;
+	margin-left: 30%;
+}
+
+.reqs_title {
+	text-align: center;
+}
+
+.username, .login {
+	margin-left: 100px;
+}
+
+#l_col_e, #r_col_e {
+	max-width: 550px;
+}
