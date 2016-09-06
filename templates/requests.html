@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% block title %}{{ number }} {% endblock title %}
+{% block extra_head %}
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript">
+        last_id = {{ last_unread_item|add:'1'}}
+    </script>
+{% endblock %}
+{% block content %}
+<!-- Start header -->
+<div class="row" id="header">
+<div class="col-xs-6"></div>
+    <div class="col-xs-6">
+        {% if user.is_authenticated %}
+        <div class="username">
+            {{ user.username }}|
+            <a href="{% url "users:auth_logout" %}">Logout</a>
+        </div>
+        {% else %}
+        <div class="login"><a href="{% url 'users:auth_login' %}">Login</a></div>
+        {% endif %}
+    </div>
+</div>
+<!-- End Header -->
+ <div class="col-xs-12">
+    <table class="table" id="req_table">
+        <thead>
+            <tr>
+                <div class="reqs_title"><h2><strong>Requests</strong><br></h2></div>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>
+                <div id="sort_link">
+
+                    <a href="/requests/{% if curr_req == '/requests/' or curr_req == '/requests/prior_asc/' or curr_req == '/requests/number/'  %}prior/{% endif %}{% if curr_req == '/requests/prior/' %}prior_asc/{% endif %}">
+                    Priority{% if curr_req == '/requests/prior/' %}&darr;{% elif curr_req == '/requests/prior_asc/' %}&uarr;{% endif %}</a>
+
+                </div>
+                </th>
+                <th><div class="col-xs-6">Change Priority</div></th>
+                <th>Author</th>
+                <th>
+                <a href="/requests/number/"><div id="num">Number{% if sort == 'number' %}&darr;{% endif %}</div></a></th>
+                <th>Date</th>
+                <th>Method</th>
+                <th>Path</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for request in requests %}
+        <form id="{{ request.id }}" action="javascript:OnSubmit({{ request.id }});" method="POST">
+        {% csrf_token %}
+            <tr class="request" id="req{{ request.id }}">
+                <td class="req_pr"> {{ request.priority }} </td>
+                <td> 
+                    <div class="form-group">
+                    <div class="col-xs-6">
+                        {{ req_form.as_p }}
+                    </div>
+                    <button type="submit" id="submit_button" 
+                    value="{{ request.id }}" class="submit_button{{ request.id }} btn btn-default">Submit
+                    </button></div>
+                    <div class="err{{ request.id }}"></div>
+                </td>
+                <td> <strong>{{ request.author }}</strong> </td>
+                <td> #{{ request.pk }} </td>
+                <td> {{ request.date|date:"Y-m-d H:i:s.u" }} </td>
+                <td> {{ request.method }} </td>
+                <td> {{ request.name }} </td>
+                <td> {{ request.status }} </td>
+            </tr>
+        </form>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="col-xs-12">
+    <div class="contacts">
+        <hr width="75%" />
+        <a href="{% url 'contacts' %}">Personal Data</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var dj_form = '<div class="col-xs-6">{{ req_form.as_p }}</div>'
+    var token = '{{ csrf_token }}'
+</script>
+
+<script type="text/javascript">
+var pk = 0;
+    function OnSubmit(id) {
+        pk = $('.submit_button' + id).val();
+        var $frm = $('#'+pk);
+        $.ajax({
+            type: "POST",
+            url: "{% url 'requests' %}",
+            global: false,
+            data: $frm.serialize() + '&pk=' + pk,
+            beforeSend: function(){
+                $('.submit_button').addClass('hidden');
+                $("input").attr("disabled", "disabled");
+            },
+            success: function(){
+                location.reload(true);
+            },
+            error: function(data){
+                errors = JSON.parse(data.responseText);
+                display_form_errors(errors, pk);
+            },
+            complete: function(){
+                $('.hidden').removeClass('hidden');
+                $("input").removeAttr("disabled");
+            }
+        });
+    }
+function display_form_errors(errors, pk) {
+    for (var k in errors) {
+         $('.err'+pk).after('<div class="error">' + errors[k] + '</div>');
+         setTimeout(function() {
+              $('.error').hide();
+         }, 2000);
+    }
+}
+</script>
+
+{% endblock content %}
