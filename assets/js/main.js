@@ -74,8 +74,9 @@ function insRow(data)
 
     for(i=0;i<data.length;i++){
         cell1.innerHTML = data[i].fields.priority;
-        cell2.innerHTML = '<div class="form-group"><form method="POST" action="javascript:OnSubm('
-        + data[i].pk + ',' + data[i].fields.priority + ');"><input type="hidden" name="csrfmiddlewaretoken" value="'+ token + '">'
+        cell2.innerHTML = '<div class="form-group"><form method="POST" \
+        action="javascript:OnSubm(' + data[i].pk + ',' + data[i].fields.priority 
+        + ');"><input type="hidden" name="csrfmiddlewaretoken" value="'+ token + '">'
         + dj_form + '<button type="submit" id="submit_button" value="' + data[i].pk
         + '" class="submit_button' + data[i].pk + ' btn btn-default">Submit\
         </button></div><div class="err' + data[i].pk + '"></div></form>';

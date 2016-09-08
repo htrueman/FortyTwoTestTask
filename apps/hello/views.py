@@ -17,14 +17,15 @@ def contact_data(request):
     return render(request, 'contacts.html', {'data': data})
 
 
-def requests(request, order='number'):
+def requests(request):
+    order = request.GET.get('order', '')
     if order == 'prior':
         requests = list(RequestKeeperModel.objects.all().
                         order_by('-priority', '-pk'))[:10]
     if order == 'prior_asc':
         requests = list(RequestKeeperModel.objects.all().
                         order_by('priority', 'pk'))[:10]
-    elif order == 'number':
+    elif order == 'number' or not order:
         requests = list(RequestKeeperModel.objects.all().
                         order_by('-pk'))[:10]
     req_form = ChangeReqsPrior()
@@ -59,13 +60,11 @@ def requests(request, order='number'):
         if req.priority == 0:
             last = req.id
             break
-
     return render(request, 'requests.html', {
         'requests': requests,
         'req_form': req_form,
         'last_unread_item': last,
-        'sort': order,
-        'curr_req': request.path
+        'sort': order
     })
 
 
