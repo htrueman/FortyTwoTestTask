@@ -37,7 +37,7 @@
             <tr>
                 <th>
                 <div id="sort_link">
-                    <a href="{% url 'requests' %}?order={% if sort == '' or sort == 'prior_asc' or sort == 'number'  %}prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
+                    <a class="sort_link" href="{% url 'requests' %}?order={% if sort == '' or sort == 'prior_asc' or sort == 'number'  %}prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
                     Priority{% if sort == 'prior' %}&darr;{% elif sort == 'prior_asc' %}&uarr;{% endif %}</a>
                 </div>
                 </th>
@@ -88,6 +88,7 @@
 </div>
 
 <script type="text/javascript">
+    var sort = '{{ sort }}';
     var dj_form = '<div class="col-xs-6">{{ req_form.as_p }}</div>'
     var token = '{{ csrf_token }}'
 </script>

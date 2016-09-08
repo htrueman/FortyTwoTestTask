@@ -46,10 +46,10 @@ function insRow(data)
     
     var x=document.getElementById('req_table');
     $(".req_pr").each(function(i, obj) {
-        if (($(this).text() > 0) && window.location.pathname == '/requests/prior/') {
+        if (($(this).text() > 0) && sort == 'prior') {
            row_num++; 
         }
-        else if (window.location.pathname == '/requests/prior_asc/') {
+        else if (sort == 'prior_asc') {
             if ($('#req_table tr').length == 12) {
                 row_num++; 
             }
@@ -111,11 +111,12 @@ $(window).blur(function() {
     Active = 0;
 });
 
+var link = $('a.sort_link').attr('href');
 $(document).ready(function(){
     $("title").html('('+count+')' + ' Name');
     setInterval(function(){
         $.ajax({
-            url: '/requests/',
+            url: link,
             data: {'last_unread_item': last_id},
             dataType: 'json',
             success: function(data){
