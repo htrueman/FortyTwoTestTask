@@ -44,7 +44,7 @@ function OnSubm(pk, priority) {
 function insRow(data)
 {
     
-    var x=document.getElementById('req_table');
+    var req_table=document.getElementById('req_table');
     $(".req_pr").each(function(i, obj) {
         if (($(this).text() > 0) && sort == 'prior') {
            row_num++; 
@@ -62,32 +62,28 @@ function insRow(data)
         }
     });
 
-    var row = x.insertRow(row_num);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
-    var cell6 = row.insertCell(5);
-    var cell7 = row.insertCell(6);
-    var cell8 = row.insertCell(-1);
+    var row = req_table.insertRow(row_num);
+    var cells = [];
+    for (i=-1; i<7; i++) {
+        cells.push(row.insertCell(i));
+    }
 
     for(i=0;i<data.length;i++){
-        cell1.innerHTML = data[i].fields.priority;
-        cell2.innerHTML = '<div class="form-group"><form method="POST" \
+        cells[1].innerHTML = data[i].fields.priority;
+        cells[2].innerHTML = '<div class="form-group"><form method="POST" \
         action="javascript:OnSubm(' + data[i].pk + ',' + data[i].fields.priority 
         + ');"><input type="hidden" name="csrfmiddlewaretoken" value="'+ token + '">'
         + dj_form + '<button type="submit" id="submit_button" value="' + data[i].pk
         + '" class="submit_button' + data[i].pk + ' btn btn-default">Submit\
         </button></div><div class="err' + data[i].pk + '"></div></form>';
-        cell3.innerHTML = '<strong>' + data[i].fields.author + '</strong>';
-        cell4.innerHTML = '#' + data[i].pk;
-        cell5.innerHTML = data[i].fields.date;
-        cell6.innerHTML = data[i].fields.method;
-        cell7.innerHTML = data[i].fields.name;
-        cell8.innerHTML = data[i].fields.status;
+        cells[3].innerHTML = '<strong>' + data[i].fields.author + '</strong>';
+        cells[4].innerHTML = '#' + data[i].pk;
+        cells[5].innerHTML = data[i].fields.date;
+        cells[6].innerHTML = data[i].fields.method;
+        cells[7].innerHTML = data[i].fields.name;
+        cells[0].innerHTML = data[i].fields.status;
         row.className = 'request';
-        cell1.className = 'req_pr';
+        cells[1].className = 'req_pr';
         row.id = data[i].pk;
     }
     update_items();
