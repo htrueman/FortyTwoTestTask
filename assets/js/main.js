@@ -70,12 +70,18 @@ function insRow(data)
 
     for(i=0;i<data.length;i++){
         cells[1].innerHTML = data[i].fields.priority;
-        cells[2].innerHTML = '<div class="form-group"><form method="POST" \
-        action="javascript:OnSubm(' + data[i].pk + ',' + data[i].fields.priority 
-        + ');"><input type="hidden" name="csrfmiddlewaretoken" value="'+ token + '">'
-        + dj_form + '<button type="submit" id="submit_button" value="' + data[i].pk
-        + '" class="submit_button' + data[i].pk + ' btn btn-default">Submit\
-        </button></div><div class="err' + data[i].pk + '"></div></form>';
+        cells[2].innerHTML = '<div class="form-group">\
+                                <form method="POST" \
+                                action="javascript:OnSubm(' + data[i].pk + ',' 
+                                + data[i].fields.priority + ');">\
+                                    <input type="hidden" name="csrfmiddlewaretoken" value="'+ token + '">'
+                                    + dj_form 
+                                    + '<button type="submit" id="submit_button" value="' + data[i].pk
+                                    + '" class="submit_button' + data[i].pk + ' btn btn-default">\
+                                    Submit\
+                                    </button>\
+                                </form>\
+                                </div><div class="err' + data[i].pk + '"></div>';
         cells[3].innerHTML = '<strong>' + data[i].fields.author + '</strong>';
         cells[4].innerHTML = '#' + data[i].pk;
         cells[5].innerHTML = data[i].fields.date;
@@ -125,5 +131,4 @@ $(document).ready(function(){
         });
     }
     , 2000);
-
 });
