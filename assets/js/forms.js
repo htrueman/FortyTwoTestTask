@@ -1,4 +1,3 @@
-
 var temp_err = [];
 
 $(document).ready(function() {
@@ -15,8 +14,10 @@ $(document).ready(function() {
             beforeSend: function(){
                 $('#message').text('');
                 $('.hidden').removeClass('hidden');
-                var msg = 'Save changes...';
-                $('#message').text(msg);
+                if (temp_err.length < 0) {
+                    var msg = 'Save changes...';
+                    $('#message').text(msg);
+                }
                 $('#submit_button').addClass('hidden');
                 $('#a_cancel').addClass('hidden');
                 $("input").attr("disabled", "disabled");
@@ -86,7 +87,7 @@ $(document).ready(function(){
     var id = 0;
     $("#id_photo").change(function(){
         var ext = $(this).val().split('.').pop().toLowerCase();
-        if($.inArray(ext, ['gif','png','jpg','jpeg']) == 1) {
+        if($.inArray(ext, ['gif','png','jpg','jpeg']) >= 1) {
             ImagePreview(this);
         }
         });
