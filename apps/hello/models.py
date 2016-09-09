@@ -38,12 +38,8 @@ class MyData(models.Model):
         upload_to='img/')
 
     def save(self, *args, **kwargs):
-        SamePhoto = False
         if self.photo:
             size = (200, 200)
-            person = MyData.objects.get(id=self.id)
-            if person.photo == self.photo:
-                SamePhoto = True
             image = Image.open(StringIO.StringIO(self.photo.read()))
             (width, height) = image.size
             if (width > 200) or (height > 200):
@@ -58,7 +54,7 @@ class MyData(models.Model):
                 'image/jpeg', output.len, None)
         try:
             this = MyData.objects.get(id=self.id)
-            if this.photo == self.photo or SamePhoto:
+            if this.photo == self.photo:
                 self.photo = this.photo
             else:
                 this.photo.delete(save=False)

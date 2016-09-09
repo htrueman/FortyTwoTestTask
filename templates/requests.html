@@ -18,7 +18,7 @@
         {% if user.is_authenticated %}
         <div class="username">
             {{ user.username }}|
-            <a href="{% url "users:auth_logout" %}">Logout</a>
+            <a href="{% url 'users:auth_logout' %}">Logout</a>
         </div>
         {% else %}
         <div class="login"><a href="{% url 'users:auth_login' %}">Login</a></div>
@@ -37,16 +37,14 @@
             <tr>
                 <th>
                 <div id="sort_link">
-
-                    <a href="/requests/{% if curr_req == '/requests/' or curr_req == '/requests/prior_asc/' or curr_req == '/requests/number/'  %}prior/{% endif %}{% if curr_req == '/requests/prior/' %}prior_asc/{% endif %}">
-                    Priority{% if curr_req == '/requests/prior/' %}&darr;{% elif curr_req == '/requests/prior_asc/' %}&uarr;{% endif %}</a>
-
+                    <a class="sort_link" href="{% url 'requests' %}?order={% if sort == '' or sort == 'prior_asc' or sort == 'number'  %}prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
+                    Priority{% if sort == 'prior' %}&darr;{% elif sort == 'prior_asc' %}&uarr;{% endif %}</a>
                 </div>
                 </th>
                 <th><div class="col-xs-6">Change Priority</div></th>
                 <th>Author</th>
                 <th>
-                <a href="/requests/number/"><div id="num">Number{% if sort == 'number' %}&darr;{% endif %}</div></a></th>
+                <a href="{% url 'requests' %}?order=number"><div id="num">Number{% if sort == 'number' %}&darr;{% endif %}</div></a></th>
                 <th>Date</th>
                 <th>Method</th>
                 <th>Path</th>
@@ -90,6 +88,7 @@
 </div>
 
 <script type="text/javascript">
+    var sort = '{{ sort }}';
     var dj_form = '<div class="col-xs-6">{{ req_form.as_p }}</div>'
     var token = '{{ csrf_token }}'
 </script>
