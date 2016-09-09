@@ -19,15 +19,7 @@ def contact_data(request):
 
 def requests(request):
     order = request.GET.get('order', '')
-    if order == 'prior':
-        requests = list(RequestKeeperModel.objects.all().
-                        order_by('-priority', '-pk'))[:10]
-    if order == 'prior_asc':
-        requests = list(RequestKeeperModel.objects.all().
-                        order_by('priority', 'pk'))[:10]
-    elif order == 'number' or not order:
-        requests = list(RequestKeeperModel.objects.all().
-                        order_by('-pk'))[:10]
+    requests = reqs_ordering(order)
     req_form = ChangeReqsPrior()
     if request.method == 'POST':
         pke = request.POST['pk']
@@ -35,37 +27,69 @@ def requests(request):
         req_form = ChangeReqsPrior(request.POST, instance=instance)
         if req_form.is_valid():
             req_form.save()
-            if request.is_ajax():
-                return HttpResponse('OK')
+            return reqs_if_ajax(request)
         else:
             if request.is_ajax():
-                errors_dict = {}
-                if req_form.errors:
-                    for error in req_form.errors:
-                        print error
-                        err = req_form.errors[error]
-                        errors_dict[error] = unicode(err)
-                return HttpResponseBadRequest(json.dumps(errors_dict))
+                return reqs_ajax(req_form)
     if request.is_ajax():
-        if 'last_unread_item' not in request.GET:
-            return None
-        object = RequestKeeperModel.objects.filter(
-            id__gt=int(
-                request.GET['last_unread_item'])).order_by('-id')[:10]
-        object = list(object)
-        data = serialize('json', object)
-        return HttpResponse(data, content_type="application/json")
-    last = 0
-    for req in requests:
-        if req.priority == 0:
-            last = req.id
-            break
+        return reqs_last_unread_item(request)
+    last = reqs_last_item(requests)
     return render(request, 'requests.html', {
         'requests': requests,
         'req_form': req_form,
         'last_unread_item': last,
         'sort': order
     })
+
+
+def reqs_ordering(order):
+    if order == 'prior':
+        return list(RequestKeeperModel.objects.all().
+                    order_by('-priority', '-pk'))[:10]
+    if order == 'prior_asc':
+        return list(RequestKeeperModel.objects.all().
+                    order_by('priority', 'pk'))[:10]
+    elif order == 'number' or not order:
+        return list(RequestKeeperModel.objects.all().
+                    order_by('-pk'))[:10]
+
+
+def reqs_last_unread_item(req):
+    if 'last_unread_item' not in req.GET:
+        return None
+    object = RequestKeeperModel.objects.filter(
+        id__gt=int(
+            req.GET['last_unread_item'])).order_by('-id')[:10]
+    object = list(object)
+    data = serialize('json', object)
+    return HttpResponse(data, content_type="application/json")
+
+
+def reqs_ajax(req_form):
+    if req_form.errors:
+        errors_dict = {}
+        if req_form.errors:
+            for error in req_form.errors:
+                print error
+                err = req_form.errors[error]
+                errors_dict[error] = unicode(err)
+        return HttpResponseBadRequest(json.dumps(errors_dict))
+    return 'ERROR'
+
+
+def reqs_if_ajax(req):
+    if req.is_ajax():
+        return HttpResponse('OK')
+    return HttpResponse('NOT AJAX')
+
+
+def reqs_last_item(requests):
+    last = 0
+    for req in requests:
+        if req.priority == 0:
+            last = req.id
+            break
+    return last
 
 
 @login_required()
@@ -76,26 +100,31 @@ def edit_contacts(request):
           request.POST,
           request.FILES,
           instance=info)
-        if form.is_valid():
-            form.save()
-            if request.is_ajax():
-                return HttpResponse('OK')
-            else:
-                return render(request, 'edit_contacts.html', {'form': form})
-        else:
-            if request.is_ajax():
-                errors_dict = {}
-                if form.errors:
-                    for error in form.errors:
-                        err = form.errors[error]
-                        errors_dict[error] = unicode(err)
-                return HttpResponseBadRequest(json.dumps(errors_dict))
-            else:
-                message = 'Fail'
-                return render(request, 'edit_contacts.html',
-                              {'form': form, 'message': message})
+        return edit_proc(request, form)
     else:
         form = EditForm(instance=info)
         return render(
                         request, 'edit_contacts.html',
                         {'form': form, 'info': info})
+
+
+def edit_proc(req, form):
+    if form.is_valid():
+        form.save()
+        if req.is_ajax():
+            return HttpResponse('OK')
+        else:
+            return render(req, 'edit_contacts.html', {'form': form})
+    else:
+        if req.is_ajax():
+            errors_dict = {}
+            if form.errors:
+                for error in form.errors:
+                    err = form.errors[error]
+                    errors_dict[error] = unicode(err)
+            return HttpResponseBadRequest(json.dumps(errors_dict))
+        else:
+            message = 'Fail'
+            return render(req, 'edit_contacts.html',
+                          {'form': form, 'message': message})
+    return 'OK'
