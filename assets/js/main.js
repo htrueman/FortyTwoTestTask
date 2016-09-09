@@ -94,17 +94,18 @@ function insRow(data)
     }
     update_items();
 }
+var title = $('title').text().replace(/\([0-9]+\)/, '');
 var Active = 1;
 function updateRequests(data){
-   if (Active==0){
-    count = count + data.length;
-    $("title").html('('+count+')' + ' Name');
+    if (Active==0){
+        count = count + data.length;
+        $("title").text('('+count+')'+title);
    }
    last_id = data[0].pk;
 }
 
 $(window).focus(function() {
-    $("title").html('Name');
+    $('title').text(title);
     count = 0;
     Active = 1;
 });
@@ -115,7 +116,7 @@ $(window).blur(function() {
 
 var link = $('a.sort_link').attr('href');
 $(document).ready(function(){
-    $("title").html('('+count+')' + ' Name');
+    $("title").text('('+count+')'+title);
     setInterval(function(){
         $.ajax({
             url: link,
