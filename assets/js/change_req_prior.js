@@ -1,13 +1,10 @@
-
-
-$(document).ready(function(){
 var pk = 0;
     function OnSubmit(id) {
         pk = $('.submit_button' + id).val();
         var $frm = $('#'+pk);
         $.ajax({
             type: "POST",
-            url: "/requests/",
+            url: link,
             global: false,
             data: $frm.serialize() + '&pk=' + pk,
             beforeSend: function(){
@@ -35,4 +32,3 @@ function display_form_errors(errors, pk) {
          }, 2000);
     }
 }
-});

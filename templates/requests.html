@@ -6,6 +6,7 @@
     <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/change_req_prior.js' %}"></script>
     <script type="text/javascript">
         last_id = {{ last_unread_item }}
     </script>
@@ -91,43 +92,6 @@
     var sort = '{{ sort }}';
     var dj_form = '<div class="col-xs-6">{{ req_form.as_p }}</div>'
     var token = '{{ csrf_token }}'
-</script>
-
-<script type="text/javascript">
-var pk = 0;
-    function OnSubmit(id) {
-        pk = $('.submit_button' + id).val();
-        var $frm = $('#'+pk);
-        $.ajax({
-            type: "POST",
-            url: "{% url 'requests' %}",
-            global: false,
-            data: $frm.serialize() + '&pk=' + pk,
-            beforeSend: function(){
-                $('.submit_button').addClass('hidden');
-                $("input").attr("disabled", "disabled");
-            },
-            success: function(){
-                location.reload(true);
-            },
-            error: function(data){
-                errors = JSON.parse(data.responseText);
-                display_form_errors(errors, pk);
-            },
-            complete: function(){
-                $('.hidden').removeClass('hidden');
-                $("input").removeAttr("disabled");
-            }
-        });
-    }
-function display_form_errors(errors, pk) {
-    for (var k in errors) {
-         $('.err'+pk).after('<div class="error">' + errors[k] + '</div>');
-         setTimeout(function() {
-              $('.error').hide();
-         }, 2000);
-    }
-}
 </script>
 
 {% endblock content %}
