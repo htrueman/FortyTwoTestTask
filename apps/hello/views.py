@@ -53,5 +53,5 @@ def edit_contacts(request):
     else:
         form = EditForm(instance=info)
         return render(
-                        request, 'edit_contacts.html',
-                        {'form': form, 'info': info})
+            request, 'edit_contacts.html',
+            {'form': form, 'info': info})
