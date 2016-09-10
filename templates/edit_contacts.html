@@ -5,7 +5,8 @@
 {% endblock %}
 {% block content %}
     <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/datepicker.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datepicker.js' %}">
+    </script>
 
 {% if not info %}
         <h1>
@@ -24,7 +25,9 @@
         Photo: <br>
             <div class="photo">
                     {% if not form.photo.value %}
-                               <img class="img-responsive" src='{{ STATIC_URL }}img/default_user.jpg' style="max-height: 200px;max-width: 200px;">
+                               <img class="img-responsive" src='{{ STATIC_URL }}
+                               img/default_user.jpg' style="max-height: 200px;
+                               max-width: 200px;">
                     {% else %}
                         <div class="img">
                                <img src="{{ MEDIA_URL }}{{form.photo.value}}">
@@ -42,12 +45,17 @@
         Bio:<br><div class="other">{{ form.bio }}</div>
         <br>
          <div id="message"></div>
-         <progress id="progressbar" class="hidden" style="width:300px" value="0" max="100"></progress>
+         <progress id="progressbar" class="hidden" style="width:300px" 
+         value="0" max="100"></progress>
          <br>
     </div>
     <div class="col-xs-12">
-        <button id='submit_button' class="btn btn-primary" type="submit">Submit</button>
-        <a id='a_cancel' class="btn btn-default"  href="{% url 'contacts' %}">Cancel</a>
+        <button id='submit_button' class="btn btn-primary" type="submit">
+        Submit
+        </button>
+        <a id='a_cancel' class="btn btn-default"  href="{% url 'contacts' %}">
+        Cancel
+        </a>
     </div>
  </div>
 </form>

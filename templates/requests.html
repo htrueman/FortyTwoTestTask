@@ -5,7 +5,9 @@
 {% block extra_head %}
     <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}">
     </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script 
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/change_req_prior.js' %}"></script>
     <script type="text/javascript">
@@ -23,7 +25,9 @@
             <a href="{% url 'users:auth_logout' %}">Logout</a>
         </div>
         {% else %}
-        <div class="login"><a href="{% url 'users:auth_login' %}">Login</a></div>
+        <div class="login">
+        <a href="{% url 'users:auth_login' %}">Login</a>
+        </div>
         {% endif %}
     </div>
 </div>
@@ -32,21 +36,32 @@
     <table class="table" id="req_table">
         <thead>
             <tr>
-                <div class="reqs_title"><h2><strong>Requests</strong><br></h2></div>
+                <div class="reqs_title">
+                <h2><strong>Requests</strong><br></h2>
+                </div>
             </tr>
         </thead>
         <thead>
             <tr>
                 <th>
                 <div id="sort_link">
-                    <a class="sort_link" href="{% url 'requests' %}?order={% if sort == '' or sort == 'prior_asc' or sort == 'number'  %}prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
-                    Priority{% if sort == 'prior' %}&darr;{% elif sort == 'prior_asc' %}&uarr;{% endif %}</a>
+                <a class="sort_link" 
+                href="{% url 'requests' %}
+?order={% if sort == '' or sort == 'prior_asc' or sort == 'number'  %}
+prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
+                Priority
+                {% if sort == 'prior' %}&darr;
+                {% elif sort == 'prior_asc' %}&uarr;{% endif %}
+                </a>
                 </div>
                 </th>
                 <th><div class="col-xs-6">Change Priority</div></th>
                 <th>Author</th>
                 <th>
-                <a href="{% url 'requests' %}?order=number"><div id="num">Number{% if sort == 'number' %}&darr;{% endif %}</div></a></th>
+                <a href="{% url 'requests' %}?order=number">
+                <div id="num">Number{% if sort == 'number' %}&darr;{% endif %}
+                </div></a>
+                </th>
                 <th>Date</th>
                 <th>Method</th>
                 <th>Path</th>
@@ -55,7 +70,8 @@
         </thead>
         <tbody>
         {% for request in requests %}
-        <form id="{{ request.id }}" action="javascript:OnSubmit({{ request.id }});" method="POST">
+        <form id="{{ request.id }}" 
+        action="javascript:OnSubmit({{ request.id }});" method="POST">
         {% csrf_token %}
             <tr class="request" id="req{{ request.id }}">
                 <td class="req_pr"> {{ request.priority }} </td>
@@ -65,7 +81,8 @@
                         {{ req_form.as_p }}
                     </div>
                     <button type="submit" id="submit_button" 
-                    value="{{ request.id }}" class="submit_button{{ request.id }} btn btn-default">Submit
+                    value="{{ request.id }}" 
+                    class="submit_button{{ request.id }} btn btn-default">Submit
                     </button></div>
                     <div class="err{{ request.id }}"></div>
                 </td>
