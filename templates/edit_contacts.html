@@ -25,9 +25,9 @@
         Photo: <br>
             <div class="photo">
                     {% if not form.photo.value %}
-                               <img class="img-responsive" src='{{ STATIC_URL }}
-                               img/default_user.jpg' style="max-height: 200px;
-                               max-width: 200px;">
+                        <img class="img-responsive" src='{{ STATIC_URL }}
+                            img/default_user.jpg' style="max-height: 200px;
+                            max-width: 200px;">
                     {% else %}
                         <div class="img">
                                <img src="{{ MEDIA_URL }}{{form.photo.value}}">
@@ -46,15 +46,15 @@
         <br>
          <div id="message"></div>
          <progress id="progressbar" class="hidden" style="width:300px" 
-         value="0" max="100"></progress>
+            value="0" max="100"></progress>
          <br>
     </div>
     <div class="col-xs-12">
         <button id='submit_button' class="btn btn-primary" type="submit">
-        Submit
+            Submit
         </button>
         <a id='a_cancel' class="btn btn-default"  href="{% url 'contacts' %}">
-        Cancel
+            Cancel
         </a>
     </div>
  </div>
