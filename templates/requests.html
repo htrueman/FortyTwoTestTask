@@ -6,7 +6,7 @@
     <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}">
     </script>
     <script 
-    	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
     </script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/change_req_prior.js' %}"></script>
@@ -46,7 +46,7 @@
                 <th>
                 <div id="sort_link">
                 <a class="sort_link" 
-                	href="{% url 'requests' %}
+                    href="{% url 'requests' %}
 ?order={% if sort == '' or sort == 'prior_asc' or sort == 'number'  %}
 prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
                 Priority
@@ -81,9 +81,9 @@ prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
                         {{ req_form.as_p }}
                     </div>
                     <button type="submit" id="submit_button" 
-                    	value="{{ request.id }}" 
-                    	class="submit_button{{ request.id }} btn btn-default">
-                    		Submit
+                        value="{{ request.id }}" 
+                        class="submit_button{{ request.id }} btn btn-default">
+                            Submit
                     </button></div>
                     <div class="err{{ request.id }}"></div>
                 </td>
