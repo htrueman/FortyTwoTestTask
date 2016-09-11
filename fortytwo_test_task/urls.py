@@ -14,8 +14,6 @@ urlpatterns = patterns(
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', 'hello.views.contact_data', name='contacts'),
     url(r'^requests/$', 'hello.views.requests', name='requests'),
-    url(r'^requests/(?P<order>\w+)/?$', 'hello.views.requests',
-        name='requests'),
 
     url(r'^edit/', 'hello.views.edit_contacts', name='edit_contacts'),
 
