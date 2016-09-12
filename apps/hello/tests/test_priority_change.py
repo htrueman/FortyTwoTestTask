@@ -35,7 +35,7 @@ class RequestsPriority(TestCase):
 
     def test_changing_priority_by_anonynous_user(self):
         """
-        test if anounymous user 
+        test if anounymous user
         priority changes won't save in model
         """
         RequestKeeperModel.objects.all().delete()
