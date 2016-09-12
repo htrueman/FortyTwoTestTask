@@ -21,10 +21,10 @@
         </div>
         {% else %}
         <div class="login">
-        <a href="{% url 'users:auth_login' %}">Login</a> |
-        {% if data %}
-        <a href="{% edit_link data %}">Admin</a>
-        {% endif %}
+            <a href="{% url 'users:auth_login' %}">Login</a> |
+            {% if data %}
+            <a href="{% edit_link data %}">Admin</a>
+            {% endif %}
         </div>
         {% endif %}
     </div>
@@ -32,10 +32,10 @@
 <!-- End Header -->
 {% if data %}
 <div class="col-xs-6" id="l_col_c">
-Name: {{ data.name }} <br>
-Last name: {{ data.last_name }} <br>
-Date of birth: {{ data.birthday|date:"Y-m-d" }} <br>
-Photo: <br>
+    Name: {{ data.name }} <br>
+    Last name: {{ data.last_name }} <br>
+    Date of birth: {{ data.birthday|date:"Y-m-d" }} <br>
+    Photo: <br>
     {% if data.photo %}
         <img class="img" src="{{ data.photo.url }}" style="height: 200px;">
     {% else %}
@@ -45,12 +45,12 @@ Photo: <br>
 </div>
 
 <div class="col-xs-6" id="r_col_c">
-Contacts<br>
-Email: {{ data.email }} <br>
-Jabber: {{ data.jabber }} <br>
-Skype: {{ data.skype }} <br>
-Other contacts: {{ data.other_conts|linebreaks }} <br>
-Bio: {{ data.bio|linebreaks }} <br>
+    Contacts<br>
+    Email: {{ data.email }} <br>
+    Jabber: {{ data.jabber }} <br>
+    Skype: {{ data.skype }} <br>
+    Other contacts: {{ data.other_conts|linebreaks }} <br>
+    Bio: {{ data.bio|linebreaks }} <br>
 </div>
 {% else %}
 <h2>There are no objects in database. Please, fill it and try again<h2>

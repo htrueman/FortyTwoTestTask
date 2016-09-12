@@ -23,18 +23,18 @@
         Last name: {{ form.last_name }}
         <p style="position: relative;">Date of birth: {{ form.birthday }}</p>
         Photo: <br>
-            <div class="photo">
-                    {% if not form.photo.value %}
-                        <img class="img-responsive" src='{{ STATIC_URL }}
-                            img/default_user.jpg' style="max-height: 200px;
-                            max-width: 200px;">
-                    {% else %}
-                        <div class="img">
-                               <img src="{{ MEDIA_URL }}{{form.photo.value}}">
-                        </div>
-                    {% endif %}
-                        {{ form.photo }}
-          </div>
+        <div class="photo">
+            {% if not form.photo.value %}
+                <img class="img-responsive" 
+                    src='{{ STATIC_URL }}img/default_user.jpg' 
+                    style="max-height: 200px; max-width: 200px;">
+            {% else %}
+                <div class="img">
+                       <img src="{{ MEDIA_URL }}{{form.photo.value}}">
+                </div>
+            {% endif %}
+                {{ form.photo }}
+        </div>
     </div>
     <div class="col-xs-6" id="r_col_e">
         <strong>Contacts</strong> <br>
@@ -47,7 +47,7 @@
          <div id="message"></div>
          <progress id="progressbar" class="hidden" style="width:300px" 
             value="0" max="100"></progress>
-         <br>
+        <br>
     </div>
     <div class="col-xs-12">
         <button id='submit_button' class="btn btn-primary" type="submit">

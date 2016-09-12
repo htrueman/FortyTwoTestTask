@@ -49,18 +49,22 @@
                     href="{% url 'requests' %}
 ?order={% if sort == '' or sort == 'prior_asc' or sort == 'number'  %}
 prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
-                Priority
-                {% if sort == 'prior' %}&darr;
-                {% elif sort == 'prior_asc' %}&uarr;{% endif %}
+                    Priority
+                    {% if sort == 'prior' %}&darr;
+                    {% elif sort == 'prior_asc' %}&uarr;{% endif %}
                 </a>
                 </div>
                 </th>
-                <th><div class="col-xs-6">Change Priority</div></th>
+                {% if user.is_authenticated %}
+                    <th><div class="col-xs-6">Change Priority</div></th>
+                {% endif %}
                 <th>Author</th>
                 <th>
-                <a href="{% url 'requests' %}?order=number">
-                <div id="num">Number{% if sort == 'number' %}&darr;{% endif %}
-                </div></a>
+                    <a href="{% url 'requests' %}?order=number">
+                        <div id="num">
+                            Number{% if sort == 'number' %}&darr;{% endif %}
+                        </div>
+                    </a>
                 </th>
                 <th>Date</th>
                 <th>Method</th>
@@ -71,10 +75,11 @@ prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
         <tbody>
         {% for request in requests %}
         <form id="{{ request.id }}" 
-        action="javascript:OnSubmit({{ request.id }});" method="POST">
+            action="javascript:OnSubmit({{ request.id }});" method="POST">
         {% csrf_token %}
             <tr class="request" id="req{{ request.id }}">
                 <td class="req_pr"> {{ request.priority }} </td>
+                {% if user.is_authenticated %}
                 <td> 
                     <div class="form-group">
                     <div class="col-xs-6">
@@ -87,6 +92,7 @@ prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
                     </button></div>
                     <div class="err{{ request.id }}"></div>
                 </td>
+                {% endif %}
                 <td> <strong>{{ request.author }}</strong> </td>
                 <td class="pk"> #{{ request.pk }} </td>
                 <td> {{ request.date|date:"Y-m-d H:i:s.u" }} </td>
@@ -109,8 +115,12 @@ prior{% endif %}{% if sort == 'prior' %}prior_asc{% endif %}">
 
 <script type="text/javascript">
     var sort = '{{ sort }}';
-    var dj_form = '<div class="col-xs-6">{{ req_form.as_p }}</div>'
-    var token = '{{ csrf_token }}'
+    var dj_form = '<div class="col-xs-6">{{ req_form.as_p }}</div>';
+    var token = '{{ csrf_token }}';
+    var auth = false;
+    {% if user.is_authenticated %}
+        auth = true;
+    {% endif %}
 </script>
 
 {% endblock content %}
