@@ -31,16 +31,19 @@ def reqs_last_unread_item(req):
     return HttpResponse(data, content_type="application/json")
 
 
-def reqs_errs(req_form):
+def reqs_errs(req, req_form):
+    errors_dict = {}
     if req_form.errors:
-        errors_dict = {}
         if req_form.errors:
             for error in req_form.errors:
-                print error
                 err = req_form.errors[error]
-                errors_dict[error] = unicode(err)
-        return HttpResponseBadRequest(json.dumps(errors_dict))
-    return 'ERROR'
+                errors_dict[0] = unicode(err)
+    else:
+        err = '<ul class="errorlist"><li>'\
+              'You don\'t have permissions to change priority.'\
+              '</li></ul>'
+        errors_dict['error'] = unicode(err)
+    return HttpResponseBadRequest(json.dumps(errors_dict))
 
 
 def reqs_if_ajax(req):

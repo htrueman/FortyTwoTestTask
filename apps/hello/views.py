@@ -24,12 +24,12 @@ def requests(request):
         pke = request.POST['pk']
         instance = RequestKeeperModel.objects.get(id=pke)
         req_form = ChangeReqsPrior(request.POST, instance=instance)
-        if req_form.is_valid():
+        if req_form.is_valid() and request.user.is_authenticated():
             req_form.save()
             return reqs_if_ajax(request)
         else:
-            if request.is_ajax():
-                return reqs_errs(req_form)
+            if request.is_ajax() or not request.user.is_authenticated():
+                return reqs_errs(request, req_form)
     if request.is_ajax():
         return reqs_last_unread_item(request)
     last = reqs_last_item(requests)
