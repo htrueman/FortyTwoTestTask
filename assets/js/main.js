@@ -64,30 +64,39 @@ function insRow(data)
 
     var row = req_table.insertRow(row_num);
     var cells = [];
-    for (i=-1; i<7; i++) {
+    var rows = 7;
+    var num = [0,1,2,3,4,5,6,7];
+    if (auth == false) {
+        rows = 6;
+        num = [0,1,2,2,3,4,5,6];
+    }
+    for (i=-1; i<rows; i++) {
         cells.push(row.insertCell(i));
     }
-
+    
     for(i=0;i<data.length;i++){
-        cells[1].innerHTML = data[i].fields.priority;
-        cells[2].innerHTML = '<div class="form-group">\
-                                <form method="POST" \
-                                action="javascript:OnSubm(' + data[i].pk + ',' 
-                                + data[i].fields.priority + ');">\
-                                    <input type="hidden" name="csrfmiddlewaretoken" value="'+ token + '">'
-                                    + dj_form 
-                                    + '<button type="submit" id="submit_button" value="' + data[i].pk
-                                    + '" class="submit_button' + data[i].pk + ' btn btn-default">\
-                                    Submit\
-                                    </button>\
-                                </form>\
-                                </div><div class="err' + data[i].pk + '"></div>';
-        cells[3].innerHTML = '<strong>' + data[i].fields.author + '</strong>';
-        cells[4].innerHTML = '#' + data[i].pk;
-        cells[5].innerHTML = data[i].fields.date;
-        cells[6].innerHTML = data[i].fields.method;
-        cells[7].innerHTML = data[i].fields.name;
-        cells[0].innerHTML = data[i].fields.status;
+        cells[num[1]].innerHTML = data[i].fields.priority;
+        if (auth == true) {
+            cells[num[2]].innerHTML = 
+                '<div class="form-group">\
+                <form method="POST" \
+                action="javascript:OnSubm(' + data[i].pk + ',' 
+                + data[i].fields.priority + ');">\
+                    <input type="hidden" name="csrfmiddlewaretoken" value="'+ token + '">'
+                    + dj_form 
+                    + '<button type="submit" id="submit_button" value="' + data[i].pk
+                    + '" class="submit_button' + data[i].pk + ' btn btn-default">\
+                    Submit\
+                    </button>\
+                </form>\
+                </div><div class="err' + data[i].pk + '"></div>';
+        }
+        cells[num[3]].innerHTML = '<strong>' + data[i].fields.author + '</strong>';
+        cells[num[4]].innerHTML = '#' + data[i].pk;
+        cells[num[5]].innerHTML = data[i].fields.date;
+        cells[num[6]].innerHTML = data[i].fields.method;
+        cells[num[7]].innerHTML = data[i].fields.name;
+        cells[num[0]].innerHTML = data[i].fields.status;
         row.className = 'request';
         cells[1].className = 'req_pr';
         row.id = data[i].pk;
