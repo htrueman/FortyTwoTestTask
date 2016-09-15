@@ -55,3 +55,30 @@ def edit_contacts(request):
         return render(
             request, 'edit_contacts.html',
             {'form': form, 'info': info})
+
+
+def messaging(request):
+    mess_content = ({
+    'username1': content1,
+    'username2': content2,
+    'username3': content3,
+    'username4': content4,
+    'username5': content5,
+    'username6': content6,
+    'username7': content7,
+    'username8': content8,
+    'username9': content9,
+    'username10': content10}
+        },)
+    usernames = ({
+    'username1': username1,
+    'username2': username2,
+    'username3': username3,
+    'username4': username4,
+    'username5': username5,
+    'username6': username6,
+    'username7': username7,
+    'username8': username8,
+    'username9': username9,
+    'username10': username10},)
+    return render(request, 'messaging.html', {'users': users})
