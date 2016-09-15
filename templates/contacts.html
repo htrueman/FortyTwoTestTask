@@ -22,6 +22,7 @@
         {% else %}
         <div class="login">
             <a href="{% url 'users:auth_login' %}">Login</a> |
+            <a href="{% url 'registration' %}">Register</a> |
             {% if data %}
             <a href="{% edit_link data %}">Admin</a>
             {% endif %}
@@ -59,7 +60,8 @@
 <div class="col-xs-12">
     <div class="requests">
         <hr width="75%" />
-        <a href="{% url "requests" %}">Requests</a>
+        <a href="{% url 'requests' %}">Requests</a>
+        <a href="{% url 'messaging' %}">Messaging</a>
     </div>
 </div>
 
