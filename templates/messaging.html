@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block extra_head %}
+    <link rel="stylesheet" 
+        href="{% static 'css/messaging.css' %}" media="screen, projection"/>
+{% endblock %}
+{% block content %}
+<div class="row" id="header">
+    <div class="col-xs-6">
+        <h1>42 Coffee Cups Test Assignment</h1>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="contacts">
+        <a href="{% url 'contacts' %}">&lt;&lt;Back to personal data</a>
+        <hr width="75%" />
+    </div>
+</div>
+<div class="col-md-1">
+</div>
+<div class="col-md-5">
+<div class="messages">
+<div class="mess_title" align="center">
+    Messages
+    <hr />
+</div>
+<div class="mess">
+<div class="mess_username">
+    username1
+</div>
+<div class="mess_content">
+    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+</div>
+<hr />
+</div>
+<div class="mess">
+<div class="mess_username">
+    username2
+</div>
+<div class="mess_content">
+    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+</div>
+<hr />
+</div>
+<div class="mess">
+<div class="mess_username">
+    username3
+</div>
+<div class="mess_content">
+    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+</div>
+<hr />
+</div>
+<div class="mess">
+<div class="mess_username">
+    username4
+</div>
+<div class="mess_content">
+    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+</div>
+<hr />
+</div>
+<div class="mess">
+<div class="mess_username">
+    username5
+</div>
+<div class="mess_content">
+    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+</div>
+<hr />
+</div>
+<div class="mess">
+<div class="mess_username">
+    username6
+</div>
+<div class="mess_content">
+    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+</div>
+<hr />
+</div>
+<div class="mess">
+<div class="mess_username">
+    username7
+</div>
+<div class="mess_content">
+    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+</div>
+<hr />
+</div>
+<div class="mess">
+<div class="mess_username">
+    username8
+</div>
+<div class="mess_content">
+    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+</div>
+<hr />
+</div>
+<div class="mess">
+<div class="mess_username">
+    username9
+</div>
+<div class="mess_content">
+    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+</div>
+<hr />
+</div>
+<div class="mess">
+<div class="mess_username">
+    username10
+</div>
+<div class="mess_content">
+    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
+</div>
+<hr />
+</div>
+<hr />
+</div>
+</div>
+</div>
+<div class="col-md-1">
+</div>
+<div class="col-md-3">
+<div class="users_list">
+<div class="users_list_title">
+    List of users
+</div>
+<div class="user">
+    <a href="#">username1</a>
+</div>
+<div class="user">
+    <a href="#">username2</a>
+</div>
+<div class="user">
+    <a href="#">username3</a>
+</div>
+<div class="user">
+    <a href="#">usernam4</a>
+</div>
+<div class="user">
+    <a href="#">username5</a>
+</div>
+<div class="user">
+    <a href="#">username6</a>
+</div>
+<div class="user">
+    <a href="#">username7</a>
+</div>
+<div class="user">
+    <a href="#">username8</a>
+</div>
+<div class="user">
+    <a href="#">username9</a>
+</div>
+<div class="user">
+    <a href="#">username10</a>
+</div>
+</div>
+</div>
+{% endblock %}
