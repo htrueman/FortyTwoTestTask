@@ -68,8 +68,7 @@ def messaging(request):
     'username7': content7,
     'username8': content8,
     'username9': content9,
-    'username10': content10}
-        },)
+    'username10': content10},)
     usernames = ({
     'username1': username1,
     'username2': username2,
@@ -81,4 +80,5 @@ def messaging(request):
     'username8': username8,
     'username9': username9,
     'username10': username10},)
-    return render(request, 'messaging.html', {'users': users})
+    return render(request, 'messaging.html',
+        {'users': users, 'content': mess_content})
