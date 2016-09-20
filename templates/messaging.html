@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block extra_head %}
+    <script type="text/javascript" src="{% static 'js/mess.js' %}"></script>
     <link rel="stylesheet" 
         href="{% static 'css/messaging.css' %}" media="screen, projection"/>
 {% endblock %}
@@ -16,145 +17,38 @@
         <hr width="75%" />
     </div>
 </div>
-<div class="col-md-1">
+<div class="col-md-2">
 </div>
-<div class="col-md-5">
+<div class="col-md-8">
 <div class="messages">
 <div class="mess_title" align="center">
     Messages
-    <hr />
 </div>
-<div class="mess">
-<div class="mess_username">
-    username1
+<form id="live-search" action="" class="styled" method="post">
+<div class="form-group fgroup_u">
+    <fieldset>
+        <label for="filter">Search dialog with user:</label>
+        <input type="text" class="form-control" id="filter" placeholder="username..." />
+        <span id="filter-count"></span>
+    </fieldset>
 </div>
-<div class="mess_content">
-    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
-</div>
+</form>
 <hr />
-</div>
-<div class="mess">
-<div class="mess_username">
-    username2
-</div>
-<div class="mess_content">
-    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
-</div>
+<nav>
+    <ul>
+    {% for key, value in mess_content.items %}
+<a href="{% url 'dialog' %}">
+    <div class="mess_username">
+        {{ value.uname }}
+    </div>
+    <div class="mess_content">
+        {{ value.content }}
+    </div>
+</a>
 <hr />
-</div>
-<div class="mess">
-<div class="mess_username">
-    username3
-</div>
-<div class="mess_content">
-    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
-</div>
-<hr />
-</div>
-<div class="mess">
-<div class="mess_username">
-    username4
-</div>
-<div class="mess_content">
-    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
-</div>
-<hr />
-</div>
-<div class="mess">
-<div class="mess_username">
-    username5
-</div>
-<div class="mess_content">
-    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
-</div>
-<hr />
-</div>
-<div class="mess">
-<div class="mess_username">
-    username6
-</div>
-<div class="mess_content">
-    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
-</div>
-<hr />
-</div>
-<div class="mess">
-<div class="mess_username">
-    username7
-</div>
-<div class="mess_content">
-    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
-</div>
-<hr />
-</div>
-<div class="mess">
-<div class="mess_username">
-    username8
-</div>
-<div class="mess_content">
-    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
-</div>
-<hr />
-</div>
-<div class="mess">
-<div class="mess_username">
-    username9
-</div>
-<div class="mess_content">
-    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
-</div>
-<hr />
-</div>
-<div class="mess">
-<div class="mess_username">
-    username10
-</div>
-<div class="mess_content">
-    BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla
-</div>
-<hr />
-</div>
-<hr />
-</div>
-</div>
-</div>
-<div class="col-md-1">
-</div>
-<div class="col-md-3">
-<div class="users_list">
-<div class="users_list_title">
-    List of users
-</div>
-<div class="user">
-    <a href="#">username1</a>
-</div>
-<div class="user">
-    <a href="#">username2</a>
-</div>
-<div class="user">
-    <a href="#">username3</a>
-</div>
-<div class="user">
-    <a href="#">usernam4</a>
-</div>
-<div class="user">
-    <a href="#">username5</a>
-</div>
-<div class="user">
-    <a href="#">username6</a>
-</div>
-<div class="user">
-    <a href="#">username7</a>
-</div>
-<div class="user">
-    <a href="#">username8</a>
-</div>
-<div class="user">
-    <a href="#">username9</a>
-</div>
-<div class="user">
-    <a href="#">username10</a>
-</div>
+{% endfor %}
+    </ul>
+</nav>
 </div>
 </div>
 {% endblock %}
